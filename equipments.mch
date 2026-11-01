@@ -2,7 +2,8 @@ MACHINE
       equipments
 SETS
     DoorState = {kOpen, kClosed};
-    Direction = {kUp, kDown, kStopped}
+    Direction = {kUp, kDown, kStopped};
+    LedState = {ON, OFF, BLINK}
 CONSTANTS
     kNLevels, kMaxDoorOpenTime, kMaxWeight
 PROPERTIES
