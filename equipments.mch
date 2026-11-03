@@ -7,11 +7,11 @@ SETS
 CONSTANTS
     kNLevels, kMaxDoorOpenTime, kMaxWeight
 PROPERTIES
-    kNLevels : NAT &
+    kNLevels : NATURAL &
     kNLevels = 5 &
-    kMaxDoorOpenTime : NAT &
+    kMaxDoorOpenTime : NATURAL &
     kMaxDoorOpenTime = 5 &
-    kMaxWeight : NAT &
+    kMaxWeight : NATURAL &
     kMaxWeight = 150 
 VARIABLES
     level,
@@ -24,13 +24,13 @@ INVARIANT
     level : 1..(kNLevels+1) &
     direction : Direction &
     door : DoorState &
-    door_open_time : NAT &
+    door_open_time : NATURAL &
     weight : NATURAL &
     is_maintenance : BOOL &
     
     (is_maintenance = TRUE => direction = kStopped) &
     (direction /= kStopped => door = kClosed) &
-    (weight > kMaxWeight => direction = kStopped) &
+    (weight > kMaxWeight => (direction = kStopped & door =kOpen)) &
     
     (door_open_time > 0 => door = kOpen)
 INITIALISATION
@@ -40,17 +40,21 @@ INITIALISATION
     door_open_time := 0 ||
     weight := 0 ||
     is_maintenance := FALSE
+DEFINITIONS
+    CAN_MOVE(dir) == (
+        weight <= kMaxWeight &
+        dir : Direction &
+        (dir = direction or direction = kStopped) &
+        door = kClosed &
+        is_maintenance = FALSE &
+        (dir = kUp or dir = kDown) &
+        (dir = kUp => level /= (kNLevels + 1)) &
+        (dir = kDown => level /= 1))
 OPERATIONS
     Move(new_direction) =
     PRE
-        weight <= kMaxWeight &
-        new_direction : Direction &
-        (new_direction = direction or direction = kStopped) &
-        door = kClosed &
-        is_maintenance = FALSE &
-        (new_direction = kUp or new_direction = kDown) &
-        (new_direction = kUp => level /= (kNLevels + 1)) &
-        (new_direction = kDown => level /= 1)
+        new_direction: Direction &
+        CAN_MOVE(new_direction)
     THEN
         IF new_direction = kUp THEN
             level := level + 1 ||
@@ -72,7 +76,9 @@ OPERATIONS
         door:= kOpen
     END;
     
-    CloseDoor = BEGIN
+    CloseDoor = PRE
+        weight <= kMaxWeight
+        THEN
         door, door_open_time := kClosed, 0
      END;
      
@@ -84,7 +90,8 @@ OPERATIONS
     // WEIGHT
     AddPassenger(weighs) = 
     PRE
-        direction = kStopped &
+        direction = kStopped & 
+        door = kOpen &
         weighs:NAT
     THEN
         weight := weight + weighs
