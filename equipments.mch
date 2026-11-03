@@ -25,7 +25,7 @@ INVARIANT
     direction : Direction &
     door : DoorState &
     door_open_time : NAT &
-    weight : NAT &
+    weight : NATURAL &
     is_maintenance : BOOL &
     
     (is_maintenance = TRUE => direction = kStopped) &
