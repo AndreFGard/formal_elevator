@@ -21,7 +21,7 @@ VARIABLES
     weight,
     is_maintenance
 INVARIANT
-    level : 1..(kNLevels+1) &
+    level : 1..(kNLevels) &
     direction : Direction &
     door : DoorState &
     door_open_time : NATURAL &
@@ -48,7 +48,7 @@ DEFINITIONS
         door = kClosed &
         is_maintenance = FALSE &
         (dir = kUp or dir = kDown) &
-        (dir = kUp => level /= (kNLevels + 1)) &
+        (dir = kUp => level /= kNLevels) &
         (dir = kDown => level /= 1))
 OPERATIONS
     Move(new_direction) =

@@ -15,7 +15,7 @@ VARIABLES
     up_requests,
     down_requests,
     press_time,
-    leds
+    leds    
 INVARIANT
     requests : POW(1..kNLevels) &
     up_requests : POW(1..kNLevels-1) &
