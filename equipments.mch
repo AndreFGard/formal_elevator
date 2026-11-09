@@ -10,9 +10,9 @@ PROPERTIES
     kNLevels : NATURAL &
     kNLevels = 5 &
     kMaxDoorOpenTime : NATURAL &
-    kMaxDoorOpenTime = 5 &
+    kMaxDoorOpenTime = 120 &
     kMaxWeight : NATURAL &
-    kMaxWeight = 150 
+    kMaxWeight = 450 
 VARIABLES
     level,
     direction,
