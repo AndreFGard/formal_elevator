@@ -3,7 +3,8 @@ MACHINE
 INCLUDES
     controller
 PROMOTES
-    press_level, press_up, press_down
+    press_level, press_up, press_down,ToggleMaintenanceKey,BlockDoor,AddPassenger,RemovePassenger
+
 DEFINITIONS
     CAN_MOVE_MAIN(new_dir) == (
     new_dir: Direction & 
@@ -15,16 +16,17 @@ DEFINITIONS
     (new_dir = kUp => level /= kNLevels) &
     (new_dir = kDown => level /= 1)
 )
+
 OPERATIONS
     TickMain =
     BEGIN
         IF state = kNoObjective THEN
-            UpdateObjective
+            NoObjective
         ELSIF state = kWorking & (level /= objective => CAN_MOVE_MAIN(broader_direction)) THEN
             Working
         ELSIF state = kOpening & direction = kStopped & door = kClosed THEN
             Opening
-        ELSIF state = kClosing & direction = kStopped & door = kOpen & weight <= kMaxWeight THEN
+        ELSIF state = kClosing & direction = kStopped & door = kOpen & weight <= kMaxWeight & door_blocked = FALSE THEN
             Closing
         END
     END

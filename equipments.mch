@@ -10,36 +10,44 @@ PROPERTIES
     kNLevels : NATURAL &
     kNLevels = 5 &
     kMaxDoorOpenTime : NATURAL &
-    kMaxDoorOpenTime = 5 &
+    // Represetns 120s
+    kMaxDoorOpenTime = 4 &
     kMaxWeight : NATURAL &
-    kMaxWeight = 150 
+    // Represents 450  
+    kMaxWeight = 5 
 VARIABLES
     level,
     direction,
     door,
     door_open_time,
+    door_blocked,
     weight,
-    is_maintenance
+    is_maintenance,
+    maintenance_requested
 INVARIANT
     level : 1..(kNLevels) &
     direction : Direction &
     door : DoorState &
+    door_blocked: BOOL &
     door_open_time : NATURAL &
     weight : NATURAL &
     is_maintenance : BOOL &
+    maintenance_requested: BOOL  &
     
-    (is_maintenance = TRUE => direction = kStopped) &
+    (is_maintenance = TRUE => direction = kStopped & door = kOpen) &
     (direction /= kStopped => door = kClosed) &
     (weight > kMaxWeight => (direction = kStopped & door =kOpen)) &
-    
-    (door_open_time > 0 => door = kOpen)
+    (door_open_time > 0 => door = kOpen) &
+    (door_blocked = TRUE => door = kOpen)
 INITIALISATION
     level := 1 ||
     direction := kStopped ||
     door := kClosed ||
+    door_blocked := FALSE ||
     door_open_time := 0 ||
     weight := 0 ||
-    is_maintenance := FALSE
+    is_maintenance := FALSE ||
+    maintenance_requested := FALSE
 DEFINITIONS
     CAN_MOVE(dir) == (
         weight <= kMaxWeight &
@@ -77,8 +85,10 @@ OPERATIONS
     END;
     
     CloseDoor = PRE
-        weight <= kMaxWeight
-        THEN
+        weight <= kMaxWeight &
+        is_maintenance = FALSE &
+        door_blocked = FALSE
+    THEN
         door, door_open_time := kClosed, 0
      END;
      
@@ -97,10 +107,29 @@ OPERATIONS
         weight := weight + weighs
     END;
     
+    RemovePassenger(weighs) = 
+    PRE
+        direction = kStopped & 
+        door = kOpen &
+        weighs:NAT &
+        weighs <= weight
+    THEN
+        weight := weight - weighs
+    END;
+    
+    
+    BlockDoor = 
+    PRE
+        door = kOpen
+    THEN
+        door_blocked := TRUE
+    END;
+        
     //MAINTENANCE
     EnableMaintenance = 
     PRE
-        direction = kStopped 
+        direction = kStopped  &
+        door = kOpen
     THEN
         is_maintenance := TRUE
     END;
@@ -111,6 +140,10 @@ OPERATIONS
         direction = kStopped
      THEN 
          is_maintenance := FALSE
-     END
+     END;
+    
+    ToggleMaintenanceKey = BEGIN
+        maintenance_requested := bool(maintenance_requested = TRUE)
+    END
  
 END
