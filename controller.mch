@@ -68,6 +68,28 @@ FINISHED_DOWNWARDS_BUT_HAS_UPWARDS == (broader_direction /= kUp & not (HAS_OBJEC
 FINISHED_UPWARDS_BUT_HAS_DOWNWARDS == (broader_direction /= kDown & not ( HAS_OBJECTIVE_UP) & HAS_OBJECTIVE_DOWN & door = kClosed)
 OPERATIONS
 
+button_open =
+    PRE
+        direction = kStopped &
+        is_maintenance = FALSE &
+        door = kClosed
+    THEN
+        OpenDoor ||
+        state := kClosing
+    END;
+
+button_close =
+    PRE
+        direction = kStopped &
+        is_maintenance = FALSE &
+        door = kOpen
+    THEN
+        IF CAN_CLOSE THEN
+            CloseDoor ||
+            state := kNoObjective
+        END
+    END;
+
 Opening = 
 PRE 
     direction = kStopped &
@@ -209,3 +231,4 @@ THEN
 END
     
 END
+    

@@ -4,7 +4,8 @@ INCLUDES
     controller
 PROMOTES
     press_level, press_up,         press_down,ToggleMaintenanceKey,BlockDoor,AddPassenger,RemovePassenger,
-    release_level, release_up, release_down, tick_buttons
+    release_level, release_up, release_down, tick_buttons,
+    button_open, button_close
 VARIABLES
     exception
 INVARIANT
