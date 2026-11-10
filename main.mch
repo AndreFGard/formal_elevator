@@ -3,7 +3,8 @@ MACHINE
 INCLUDES
     controller
 PROMOTES
-    press_level, press_up, press_down,ToggleMaintenanceKey,BlockDoor,AddPassenger,RemovePassenger
+    press_level, press_up,         press_down,ToggleMaintenanceKey,BlockDoor,AddPassenger,RemovePassenger,
+    release_level, release_up, release_down, tick_buttons
 VARIABLES
     exception
 INVARIANT

@@ -42,13 +42,16 @@ OPERATIONS
         up_3,
         down_3
     BE
-        next_press_time = press_time <+ { bb, tt | bb : pressed_buttons & tt = press_time(bb) + 1 } &
+        next_press_time = press_time <+ { bb, tt | bb : pressed_buttons & tt : NATURAL & tt = press_time(bb) + 1 } &
     
         int_3 = { nn | nn : requests & (INTERNAL |-> nn) : pressed_buttons & press_time(INTERNAL |-> nn) + 1 = 3 } &
         up_3 = { nn | nn : up_requests & (UP |-> nn) : pressed_buttons & press_time(UP |-> nn) + 1 = 3 } &
         down_3 = { nn | nn : down_requests & (DOWN |-> nn) : pressed_buttons & press_time(DOWN |-> nn) + 1 = 3 }
     IN
-        press_time := next_press_time ||
+        press_time := next_press_time <+ 
+                      (({INTERNAL} * int_3) * {0}) <+ 
+                      (({UP} * up_3) * {0}) <+ 
+                      (({DOWN} * down_3) * {0}) ||
         up_requests := up_requests - up_3 ||
         down_requests := down_requests - down_3 ||
     
@@ -75,7 +78,8 @@ OPERATIONS
     
     press_level(num) = 
     PRE
-        num : 1..kNLevels
+        num : 1..kNLevels &
+        (INTERNAL|->num) /: pressed_buttons
     THEN
         requests := requests \/ {num} ||
         leds(INTERNAL |-> num) := ON ||
@@ -85,7 +89,8 @@ OPERATIONS
 
     press_up(num) = 
     PRE
-        num : 1..(kNLevels - 1)
+        num : 1..(kNLevels - 1) &
+        (UP|->num) /: pressed_buttons
     THEN
         up_requests := up_requests \/ {num} ||
         leds(UP |-> num) := ON ||
@@ -95,7 +100,8 @@ OPERATIONS
 
     press_down(num) = 
     PRE
-        num : 2..kNLevels
+        num : 2..kNLevels &
+        (DOWN|->num) /: pressed_buttons
     THEN
         down_requests := down_requests \/ {num} ||
         leds(DOWN |-> num) := ON ||
@@ -105,7 +111,8 @@ OPERATIONS
 
     release_level(num) =
     PRE
-        num : 1..kNLevels
+        num : 1..kNLevels &
+        (INTERNAL|->num) : pressed_buttons
     THEN
         pressed_buttons := pressed_buttons - {INTERNAL |-> num} ||
         press_time(INTERNAL |-> num) := 0
@@ -113,7 +120,8 @@ OPERATIONS
 
     release_up(num) =
     PRE
-        num : 1..(kNLevels - 1)
+        num : 1..(kNLevels - 1) &
+        (UP|->num) : pressed_buttons
     THEN
         pressed_buttons := pressed_buttons - {UP |-> num} ||
         press_time(UP |-> num) := 0
@@ -121,7 +129,8 @@ OPERATIONS
 
     release_down(num) =
     PRE
-        num : 2..kNLevels
+        num : 2..kNLevels &
+        (DOWN|->num) : pressed_buttons
     THEN
         pressed_buttons := pressed_buttons - {DOWN |-> num} ||
         press_time(DOWN |-> num) := 0
