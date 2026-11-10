@@ -74,7 +74,7 @@ PRE
     state = kOpening 
 THEN
     OpenDoor ||
-    reach_floor(level) ||
+    reach_floor(level, broader_direction) ||
     IF maintenance_requested = TRUE THEN
         state := kMaintenance
     ELSE
