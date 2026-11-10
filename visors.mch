@@ -1,7 +1,6 @@
 MACHINE
     visors
 SEES
-    equipments,
     controller
 SETS
     DisplayMode = {
@@ -10,41 +9,46 @@ SETS
         kDisplayMaintenance,
         kDisplayOverweight
     }
+VARIABLES
+    ext_mode,
+    int_mode,
+    visor_level,
+    visor_dir
+INVARIANT
+    ext_mode : DisplayMode &
+    int_mode : DisplayMode &
+    visor_level : 1..kNLevels &
+    visor_dir : Direction
+INITIALISATION
+    ext_mode := kDisplayNormal ||
+    int_mode := kDisplayNormal ||
+    visor_level := 1 ||
+    visor_dir := kStopped
 OPERATIONS
-    mode, lvl, dir <-- external_display(num) =
-    PRE
-        num : 1..kNLevels
-    THEN
-        IF is_maintenance = TRUE THEN
-            mode := kDisplayMaintenance ||
-            lvl := level ||
-            dir := broader_direction
-        ELSIF door_open_time >= 120 THEN
-            mode := kDisplayBroken ||
-            lvl := level ||
-            dir := kStopped
-        ELSE
-            mode := kDisplayNormal ||
-            lvl := level ||
-            dir := broader_direction
-        END
-    END;
-
-    mode, lvl, dir <-- internal_display =
+    tick_visors =
     BEGIN
-        IF is_maintenance = TRUE THEN
-            mode := kDisplayMaintenance ||
-            lvl := level ||
-            dir := broader_direction
-        ELSIF weight > kMaxWeight THEN
-            mode := kDisplayOverweight ||
-            lvl := level ||
-            dir := broader_direction
+        visor_level := level ||
+        
+        IF is_maintenance = TRUE or door_open_time >= kMaxDoorOpenTime THEN
+            visor_dir := kStopped
         ELSE
-            mode := kDisplayNormal ||
-            lvl := level ||
-            dir := broader_direction
+            visor_dir := broader_direction
+        END ||
+
+        IF is_maintenance = TRUE THEN
+            ext_mode := kDisplayMaintenance
+        ELSIF door_open_time >= kMaxDoorOpenTime THEN
+            ext_mode := kDisplayBroken
+        ELSE
+            ext_mode := kDisplayNormal
+        END ||
+
+        IF is_maintenance = TRUE THEN
+            int_mode := kDisplayMaintenance
+        ELSIF weight > kMaxWeight THEN
+            int_mode := kDisplayOverweight
+        ELSE
+            int_mode := kDisplayNormal
         END
     END
-
 END

@@ -1,10 +1,12 @@
 MACHINE
     controller
-INCLUDES equipments, buttons
+EXTENDS equipments, buttons
+/*
 PROMOTES
       press_level, press_up, press_down,
       BlockDoor,ToggleMaintenanceKey,RemovePassenger,AddPassenger,
       release_level, release_up, release_down, tick_buttons
+*/
 SETS
     MainState = {kNoObjective, kMaintenance, kWorking,kClosing,kOpening,kWaitingBoarding}
 VARIABLES
