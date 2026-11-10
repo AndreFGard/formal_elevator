@@ -17,7 +17,7 @@ VARIABLES
     press_time,
     leds,
     pressed_buttons,
-    blinking_buttons
+    blink_time
 INVARIANT
     requests : POW(1..kNLevels) &
     up_requests : POW(1..kNLevels-1) &
@@ -25,7 +25,7 @@ INVARIANT
     press_time : valid_buttons --> NATURAL &
     leds : valid_buttons --> LedState &
     pressed_buttons : POW(valid_buttons) &
-    blinking_buttons : (1..kNLevels) --> NATURAL
+    blink_time : valid_buttons --> NATURAL
 INITIALISATION
     requests := {} ||
     up_requests := {} ||
@@ -33,20 +33,25 @@ INITIALISATION
     press_time := valid_buttons * {0} ||
     leds := valid_buttons * {OFF} ||
     pressed_buttons := {} ||
-    blinking_buttons :=  (1..kNLevels) * {0}/*so internos*/
+    blink_time := valid_buttons * {0}
 OPERATIONS
     tick_buttons = 
     LET 
         next_press_time,
         int_3,
         up_3,
-        down_3
+        down_3,
+        next_blink_time,
+        finished_blinking
     BE
         next_press_time = press_time <+ { bb, tt | bb : pressed_buttons & tt : NATURAL & tt = press_time(bb) + 1 } &
     
         int_3 = { nn | nn : requests & (INTERNAL |-> nn) : pressed_buttons & press_time(INTERNAL |-> nn) + 1 = 3 } &
         up_3 = { nn | nn : up_requests & (UP |-> nn) : pressed_buttons & press_time(UP |-> nn) + 1 = 3 } &
-        down_3 = { nn | nn : down_requests & (DOWN |-> nn) : pressed_buttons & press_time(DOWN |-> nn) + 1 = 3 }
+        down_3 = { nn | nn : down_requests & (DOWN |-> nn) : pressed_buttons & press_time(DOWN |-> nn) + 1 = 3 } &
+
+        next_blink_time = blink_time <+ { bb, tt | bb : valid_buttons & leds(bb) = BLINK & tt : NATURAL & tt = blink_time(bb) + 1 } &
+        finished_blinking = { bb | bb : valid_buttons & leds(bb) = BLINK & blink_time(bb) + 1 >= 2 }
     IN
         press_time := next_press_time <+ 
                       (({INTERNAL} * int_3) * {0}) <+ 
@@ -58,21 +63,24 @@ OPERATIONS
         IF int_3 /= {} THEN
             IF requests - int_3 /= {} THEN
                 requests := requests - int_3 ||
-                leds := leds <+ 
+                leds := leds <+ (finished_blinking * {ON}) <+
                         (({UP} * up_3) * {OFF}) <+ 
                         (({DOWN} * down_3) * {OFF}) <+ 
-                        (({INTERNAL} * int_3) * {OFF})
+                        (({INTERNAL} * int_3) * {OFF}) ||
+                blink_time := next_blink_time <+ (finished_blinking * {0})
             ELSE
-                /*mantem todos mesmo se tiver mais de um*/
-                leds := leds <+ 
+                /*mantem todos mesmo se tiver mais de um e pisca*/
+                leds := leds <+ (finished_blinking * {ON}) <+
                         (({UP} * up_3) * {OFF}) <+ 
                         (({DOWN} * down_3) * {OFF}) <+ 
-                        (({INTERNAL} * int_3) * {BLINK})
+                        (({INTERNAL} * int_3) * {BLINK}) ||
+                blink_time := next_blink_time <+ (finished_blinking * {0}) <+ (({INTERNAL} * int_3) * {0})
             END
         ELSE
-            leds := leds <+ 
+            leds := leds <+ (finished_blinking * {ON}) <+
                     (({UP} * up_3) * {OFF}) <+ 
-                    (({DOWN} * down_3) * {OFF})
+                    (({DOWN} * down_3) * {OFF}) ||
+            blink_time := next_blink_time <+ (finished_blinking * {0})
         END
     END;
     
@@ -136,21 +144,6 @@ OPERATIONS
         press_time(DOWN |-> num) := 0
     END;
     
-    ans <-- get_pending_cancel_levels = 
-    BEGIN
-        ans := { num | num : requests & (INTERNAL |-> num) : pressed_buttons & press_time(INTERNAL |-> num) >= 3 }
-    END;
-
-    ans <-- get_pending_cancel_ups = 
-    BEGIN
-        ans := { num | num : up_requests & (UP |-> num) : pressed_buttons & press_time(UP |-> num) >= 3 }
-    END;
-
-    ans <-- get_pending_cancel_downs = 
-    BEGIN
-        ans := { num | num : down_requests & (DOWN |-> num) : pressed_buttons & press_time(DOWN |-> num) >= 3 }
-    END;
-    
     clear_all = 
     BEGIN
         requests := {} ||
@@ -158,7 +151,8 @@ OPERATIONS
         down_requests := {} ||
         press_time := valid_buttons * {0} ||
         leds := valid_buttons * {OFF} ||
-        pressed_buttons := {}
+        pressed_buttons := {} ||
+        blink_time := valid_buttons * {0}
     END;
     
     reach_floor(num, bdir) =
