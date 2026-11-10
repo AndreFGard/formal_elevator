@@ -4,7 +4,13 @@ INCLUDES
     controller
 PROMOTES
     press_level, press_up, press_down,ToggleMaintenanceKey,BlockDoor,AddPassenger,RemovePassenger
-
+VARIABLES
+    exception
+INVARIANT
+    exception : BOOL & 
+    exception = FALSE
+INITIALISATION
+    exception := FALSE
 DEFINITIONS
     CAN_MOVE_MAIN(new_dir) == (
     new_dir: Direction & 
@@ -15,19 +21,44 @@ DEFINITIONS
     (new_dir = kUp or new_dir = kDown) &
     (new_dir = kUp => level /= kNLevels) &
     (new_dir = kDown => level /= 1)
-)
+);
+
+// Mirrors of controller's definitions (DEFINITIONS are not exported by INCLUDES).
+ALL_MAIN == (requests \/ up_requests \/ down_requests);
+
+GET_UP_MAIN == (
+    {lv | lv : requests \/ up_requests & lv >= level} \/
+    {lv | lv : down_requests & lv >= level & !gg .(gg : ALL_MAIN => gg <= lv)}
+);
+
+GET_DOWN_MAIN == (
+    {lv | lv : requests \/ down_requests & lv <= level} \/
+    {lv | lv : up_requests & lv <= level & !gg .(gg : ALL_MAIN => gg >= lv)}
+);
+
+HAS_UP_MAIN == (GET_UP_MAIN /= {});
+HAS_DOWN_MAIN == (GET_DOWN_MAIN /= {});
+
+TARGET_UP_MAIN == min(GET_UP_MAIN);
+TARGET_DOWN_MAIN == max(GET_DOWN_MAIN)
 
 OPERATIONS
     TickMain =
     BEGIN
         IF state = kNoObjective THEN
             NoObjective
-        ELSIF state = kWorking & (level /= objective => CAN_MOVE_MAIN(broader_direction)) THEN
+        ELSIF state = kWorking &
+              (broader_direction = kUp & HAS_UP_MAIN & TARGET_UP_MAIN /= level => CAN_MOVE_MAIN(broader_direction)) &
+              (broader_direction = kDown & HAS_DOWN_MAIN & TARGET_DOWN_MAIN /= level => CAN_MOVE_MAIN(broader_direction)) THEN
             Working
         ELSIF state = kOpening & direction = kStopped & door = kClosed THEN
             Opening
-        ELSIF state = kClosing & direction = kStopped & door = kOpen & weight <= kMaxWeight & door_blocked = FALSE THEN
+        ELSIF state = kClosing THEN
             Closing
+        ELSIF state = kMaintenance & direction = kStopped & door = kOpen THEN
+            Maintenance
+        ELSE
+            exception := TRUE
         END
     END
 END

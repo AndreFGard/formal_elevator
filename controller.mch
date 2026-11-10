@@ -6,7 +6,7 @@ PROMOTES
 SETS
     MainState = {kNoObjective, kMaintenance, kWorking,kClosing,kOpening,kWaitingBoarding}
 VARIABLES
-    broader_direction,
+    broader_direction,    
     state,
     objective
 INVARIANT
@@ -22,8 +22,8 @@ INVARIANT
     (state = kWorking => door = kClosed & broader_direction /= kStopped)
     
 INITIALISATION
-    broader_direction := kUp ||
-    state := kWorking ||
+    broader_direction := kStopped ||
+    state := kNoObjective ||
     objective := 1 
 DEFINITIONS
 CAN_MOVE_CONT(new_dir) == (
@@ -37,24 +37,35 @@ CAN_MOVE_CONT(new_dir) == (
     (new_dir = kDown => level /= 1)
 );
 
-HAS_OBJECTIVE_UP == (
-   #lv .(lv : requests \/ up_requests  & lv >= level)
-);
-   
-HAS_OBJECTIVE_DOWN == (
-   #lv .(lv : requests \/ down_requests  & lv <= level)
+ALL_OBJECTIVES == (requests \/ up_requests \/ down_requests);
+
+//TODO we can idempotently filter for >= level and save a PO.
+GET_OBJECTIVES_UP == (
+    {lv | lv : requests \/ up_requests  & lv >= level} \/
+    // If theres a down request above all other requests, the elevator will never be above it 
+    // to catch it on the way down, so I must go up towards it.
+    {lv | lv : down_requests & lv >= level & !gg .(gg : ALL_OBJECTIVES => gg <= lv)}    
 );
 
-GET_OBJECTIVES_UP == ({lv | lv : requests \/ up_requests  & lv >= level});
-GET_OBJECTIVES_DOWN == ({lv | lv : requests \/ down_requests  & lv <= level});
+GET_OBJECTIVES_DOWN == (
+    {lv | lv : requests \/ down_requests  & lv <= level} \/
+    {lv | lv : up_requests & lv <= level & !gg .(gg : ALL_OBJECTIVES => gg >= lv)}
+);
+
+HAS_OBJECTIVE_UP == (GET_OBJECTIVES_UP /= {});
+HAS_OBJECTIVE_DOWN == (GET_OBJECTIVES_DOWN /= {});
    
 CAN_CLOSE == ( (direction = kStopped &
     door = kOpen &
     door_blocked = FALSE &
     is_maintenance = FALSE &
-    weight <= kMaxWeight))
+    weight <= kMaxWeight));
+
+FINISHED_DOWNWARDS_BUT_HAS_UPWARDS == (broader_direction /= kUp & not (HAS_OBJECTIVE_DOWN) & HAS_OBJECTIVE_UP & door = kClosed);
+
+FINISHED_UPWARDS_BUT_HAS_DOWNWARDS == (broader_direction /= kDown & not ( HAS_OBJECTIVE_UP) & HAS_OBJECTIVE_DOWN & door = kClosed)
 OPERATIONS
-    
+
 Opening = 
 PRE 
     direction = kStopped &
@@ -78,20 +89,26 @@ PRE
     state = kMaintenance
 THEN
     IF is_maintenance = FALSE THEN 
-        EnableMaintenance 
+        EnableMaintenance ||
+        clear_all
     ELSIF maintenance_requested = FALSE THEN
-        state:= kNoObjective ||
+        state:= kClosing ||
         DisableMaintenance
     END
 END;
 
 Closing = 
 PRE 
-    CAN_CLOSE &
+    door = kOpen &
+    direction = kStopped &
     state = kClosing
 THEN
-    CloseDoor ||
-    state :=kNoObjective  
+    IF CAN_CLOSE THEN
+        CloseDoor ||
+        state :=kNoObjective  
+    ELSE
+        TickDoor
+    END
 END;
 
 // Stops at the nearest objective in the direction, Stop and move to NoObjective if has nowhere to go.
@@ -100,14 +117,17 @@ PRE
     state = kWorking &
     door = kClosed &
     broader_direction /= kStopped &
-    (broader_direction = kUp & HAS_OBJECTIVE_UP & objective /= level => CAN_MOVE_CONT(kUp)) &
-    (broader_direction = kDown & HAS_OBJECTIVE_DOWN & objective /= level => CAN_MOVE_CONT(kDown))
+    (direction = kUp => broader_direction = kUp) & 
+    (direction = kDown => broader_direction = kDown) & 
+    // I think this can break if someone cancels.
+    (broader_direction = kUp & HAS_OBJECTIVE_UP & min(GET_OBJECTIVES_UP) /= level => CAN_MOVE_CONT(kUp)) &
+    (broader_direction = kDown & HAS_OBJECTIVE_DOWN & max(GET_OBJECTIVES_DOWN) /= level => CAN_MOVE_CONT(kDown))
 THEN
     IF broader_direction = kUp & HAS_OBJECTIVE_UP THEN
         LET temp BE
             temp = min(GET_OBJECTIVES_UP)
         IN  
-            ASSERT  (requests : POW(1..kNLevels) & up_requests : POW(1..kNLevels) => GET_OBJECTIVES_UP:  POW(1..kNLevels)) &  temp >= level & temp: 1..kNLevels THEN 
+            ASSERT min(GET_OBJECTIVES_UP) >= level & (temp /= level => CAN_MOVE_CONT(kUp)) & temp >= level & temp: 1..kNLevels THEN 
              objective :=  temp ||
              IF temp /= level THEN
                  Move(broader_direction)
@@ -120,7 +140,7 @@ THEN
         LET temp BE
             temp = max(GET_OBJECTIVES_DOWN)
         IN 
-            ASSERT temp <= level & temp : 1..kNLevels THEN 
+            ASSERT (temp /= level => CAN_MOVE_CONT(kDown))  & temp <= level & temp : 1..kNLevels THEN 
                  objective := temp ||
                  IF temp /= level THEN
                      Move(broader_direction)
@@ -143,16 +163,20 @@ PRE
     state = kNoObjective &
     is_maintenance = FALSE 
 THEN
-   
-   IF HAS_OBJECTIVE_UP & broader_direction = kUp & door = kClosed THEN
+   // elevator stopped and wants maintenance
+   IF maintenance_requested = TRUE & door = kClosed THEN
+       state := kOpening
+   // continue up
+   ELSIF HAS_OBJECTIVE_UP & broader_direction /= kDown & door = kClosed THEN 
        state := kWorking ||
        broader_direction := kUp
-   ELSIF HAS_OBJECTIVE_DOWN  & door = kClosed THEN
+   // continue down
+   ELSIF HAS_OBJECTIVE_DOWN & broader_direction /= kUp & door = kClosed THEN 
        state := kWorking ||
        broader_direction := kDown  
-  ELSIF  HAS_OBJECTIVE_UP & HAS_OBJECTIVE_DOWN  & door = kClosed THEN
-      state := kWorking || 
-       ASSERT min(GET_OBJECTIVES_UP) >= level & max(GET_OBJECTIVES_DOWN) <= level THEN
+  /* disabled for simplicity
+   ELSIF  HAS_OBJECTIVE_UP & HAS_OBJECTIVE_DOWN  & door = kClosed THEN
+       ASSERT broader_direction = kStopped & min(GET_OBJECTIVES_UP) >= level & max(GET_OBJECTIVES_DOWN) <= level THEN
            LET closest_up,closest_down BE 
                closest_up = min(GET_OBJECTIVES_UP) - level &
                closest_down = level - min(GET_OBJECTIVES_DOWN)
@@ -161,12 +185,25 @@ THEN
                    broader_direction := kUp
                ELSE
                    broader_direction := kDown
-               END
+               END ||
+               state := kWorking
            END
        END
-   ELSIF CAN_CLOSE & ( HAS_OBJECTIVE_UP or HAS_OBJECTIVE_DOWN) THEN
+   */
+  ELSIF FINISHED_UPWARDS_BUT_HAS_DOWNWARDS THEN
+       broader_direction:= kDown ||
+       state := kWorking
+  ELSIF FINISHED_DOWNWARDS_BUT_HAS_UPWARDS THEN
+       broader_direction:= kUp ||
+       state := kWorking
+  ELSIF CAN_CLOSE & ( HAS_OBJECTIVE_UP or HAS_OBJECTIVE_DOWN) THEN
        state := kClosing
-   END
+    //nothing to do.
+  ELSIF door = kClosed THEN
+      ASSERT  (broader_direction = kUp => not (HAS_OBJECTIVE_UP)) &  (broader_direction = kDown => not (HAS_OBJECTIVE_DOWN)) THEN
+           broader_direction := kStopped
+      END
+  END
 END
     
 END

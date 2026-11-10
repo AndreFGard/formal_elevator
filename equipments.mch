@@ -91,7 +91,6 @@ OPERATIONS
     THEN
         door, door_open_time := kClosed, 0
      END;
-     
     // Updates anything regarding timers.
     TickDoor = BEGIN
         IF door = kOpen THEN door_open_time   := min({door_open_time +1,kMaxDoorOpenTime}) END
@@ -143,7 +142,7 @@ OPERATIONS
      END;
     
     ToggleMaintenanceKey = BEGIN
-        maintenance_requested := bool(maintenance_requested = TRUE)
+        maintenance_requested := bool(maintenance_requested = FALSE)
     END
  
 END

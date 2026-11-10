@@ -1,2 +1,13 @@
 bdp/
 *.desc
+bxml/pog artifacts
+*.bxml
+*.pog
+*.pos
+*.unproved
+*.nf
+*.pmi
+*.prob
+*.po
+__pycache__/
+bdp2/
