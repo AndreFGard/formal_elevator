@@ -123,6 +123,14 @@ OPERATIONS
     THEN
         door_blocked := TRUE
     END;
+    
+    UnblockDoor = 
+    PRE
+        door = kOpen &
+        door_blocked = TRUE
+    THEN
+        door_blocked := FALSE
+    END;
         
     //MAINTENANCE
     EnableMaintenance = 

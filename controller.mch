@@ -48,12 +48,12 @@ GET_OBJECTIVES_UP == (
     {lv | lv : requests \/ up_requests  & lv >= level} \/
     // If theres a down request above all other requests, the elevator will never be above it 
     // to catch it on the way down, so I must go up towards it.
-    {lv | lv : down_requests & lv >= level & !gg .(gg : ALL_OBJECTIVES => gg <= lv)}    
+    {lv | lv : down_requests & lv > level & !gg .(gg : ALL_OBJECTIVES => gg <= lv)}    
 );
 
 GET_OBJECTIVES_DOWN == (
     {lv | lv : requests \/ down_requests  & lv <= level} \/
-    {lv | lv : up_requests & lv <= level & !gg .(gg : ALL_OBJECTIVES => gg >= lv)}
+    {lv | lv : up_requests & lv < level & !gg .(gg : ALL_OBJECTIVES => gg >= lv)}
 );
 
 HAS_OBJECTIVE_UP == (GET_OBJECTIVES_UP /= {});
@@ -129,7 +129,11 @@ PRE
     direction = kStopped &
     state = kClosing
 THEN
-    IF CAN_CLOSE THEN
+    IF maintenance_requested = TRUE THEN
+        EnableMaintenance ||
+        clear_all ||
+        state := kMaintenance
+    ELSIF CAN_CLOSE THEN
         CloseDoor ||
         state :=kNoObjective  
     ELSE
@@ -149,7 +153,10 @@ PRE
     (broader_direction = kUp & HAS_OBJECTIVE_UP & min(GET_OBJECTIVES_UP) /= level => CAN_MOVE_CONT(kUp)) &
     (broader_direction = kDown & HAS_OBJECTIVE_DOWN & max(GET_OBJECTIVES_DOWN) /= level => CAN_MOVE_CONT(kDown))
 THEN
-    IF broader_direction = kUp & HAS_OBJECTIVE_UP THEN
+    IF maintenance_requested = TRUE THEN
+        state := kOpening ||
+        Stop
+    ELSIF broader_direction = kUp & HAS_OBJECTIVE_UP THEN
         LET temp BE
             temp = min(GET_OBJECTIVES_UP)
         IN  
