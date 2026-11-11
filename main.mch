@@ -5,7 +5,7 @@ INCLUDES
 PROMOTES
     press_level, press_up,         press_down,ToggleMaintenanceKey,BlockDoor,AddPassenger,RemovePassenger,
     release_level, release_up, release_down,
-    button_open, button_close
+    button_open, button_close, UnblockDoor
 SETS
     CyclePhase = {MAIN, VISORS, BUTTONS}
 VARIABLES
