@@ -42,7 +42,8 @@ OPERATIONS
         up_3,
         down_3,
         next_blink_time,
-        finished_blinking
+        finished_blinking,
+        all_reqs
     BE
         next_press_time = press_time <+ { bb, tt | bb : pressed_buttons & tt : NATURAL & tt = press_time(bb) + 1 } &
     
@@ -51,7 +52,9 @@ OPERATIONS
         down_3 = { nn | nn : down_requests & (DOWN |-> nn) : pressed_buttons & press_time(DOWN |-> nn) + 1 = 3 } &
 
         next_blink_time = blink_time <+ { bb, tt | bb : valid_buttons & leds(bb) = BLINK & tt : NATURAL & tt = blink_time(bb) + 1 } &
-        finished_blinking = { bb | bb : valid_buttons & leds(bb) = BLINK & blink_time(bb) + 1 >= 2 }
+        finished_blinking = { bb | bb : valid_buttons & leds(bb) = BLINK & blink_time(bb) + 1 >= 2 } &
+        
+        all_reqs = ({INTERNAL} * requests) \/ ({UP} * up_requests) \/ ({DOWN} * down_requests)
     IN
         press_time := next_press_time <+ 
                       (({INTERNAL} * int_3) * {0}) <+ 
@@ -63,21 +66,21 @@ OPERATIONS
         IF int_3 /= {} THEN
             IF requests - int_3 /= {} THEN
                 requests := requests - int_3 ||
-                leds := leds <+ (finished_blinking * {ON}) <+
+                leds := leds <+ ((finished_blinking /\ all_reqs) * {ON}) <+ ((finished_blinking - all_reqs) * {OFF}) <+
                         (({UP} * up_3) * {OFF}) <+ 
                         (({DOWN} * down_3) * {OFF}) <+ 
                         (({INTERNAL} * int_3) * {OFF}) ||
                 blink_time := next_blink_time <+ (finished_blinking * {0})
             ELSE
                 /*mantem todos mesmo se tiver mais de um e pisca*/
-                leds := leds <+ (finished_blinking * {ON}) <+
+                leds := leds <+ ((finished_blinking /\ all_reqs) * {ON}) <+ ((finished_blinking - all_reqs) * {OFF}) <+
                         (({UP} * up_3) * {OFF}) <+ 
                         (({DOWN} * down_3) * {OFF}) <+ 
                         (({INTERNAL} * int_3) * {BLINK}) ||
                 blink_time := next_blink_time <+ (finished_blinking * {0}) <+ (({INTERNAL} * int_3) * {0})
             END
         ELSE
-            leds := leds <+ (finished_blinking * {ON}) <+
+            leds := leds <+ ((finished_blinking /\ all_reqs) * {ON}) <+ ((finished_blinking - all_reqs) * {OFF}) <+
                     (({UP} * up_3) * {OFF}) <+ 
                     (({DOWN} * down_3) * {OFF}) ||
             blink_time := next_blink_time <+ (finished_blinking * {0})
@@ -89,10 +92,15 @@ OPERATIONS
         num : 1..kNLevels &
         (INTERNAL|->num) /: pressed_buttons
     THEN
-        requests := requests \/ {num} ||
-        leds(INTERNAL |-> num) := ON ||
-        pressed_buttons := pressed_buttons \/ {INTERNAL |-> num} ||
-        press_time(INTERNAL |-> num) := 0
+        IF is_maintenance = FALSE THEN
+            requests := requests \/ {num} ||
+            leds(INTERNAL |-> num) := ON ||
+            pressed_buttons := pressed_buttons \/ {INTERNAL |-> num} ||
+            press_time(INTERNAL |-> num) := 0
+        ELSE
+            leds(INTERNAL|->num) := BLINK ||
+            blink_time(INTERNAL |-> num) := 0
+        END
     END;
 
     press_up(num) = 
@@ -100,10 +108,15 @@ OPERATIONS
         num : 1..(kNLevels - 1) &
         (UP|->num) /: pressed_buttons
     THEN
-        up_requests := up_requests \/ {num} ||
-        leds(UP |-> num) := ON ||
-        pressed_buttons := pressed_buttons \/ {UP |-> num} ||
-        press_time(UP |-> num) := 0
+        IF is_maintenance = FALSE THEN
+            up_requests := up_requests \/ {num} ||
+            leds(UP |-> num) := ON ||
+            pressed_buttons := pressed_buttons \/ {UP |-> num} ||
+            press_time(UP |-> num) := 0
+        ELSE
+            leds(UP|->num) := BLINK ||
+            blink_time(UP |-> num) := 0
+        END
     END;
 
     press_down(num) = 
@@ -111,10 +124,15 @@ OPERATIONS
         num : 2..kNLevels &
         (DOWN|->num) /: pressed_buttons
     THEN
-        down_requests := down_requests \/ {num} ||
-        leds(DOWN |-> num) := ON ||
-        pressed_buttons := pressed_buttons \/ {DOWN |-> num} ||
-        press_time(DOWN |-> num) := 0
+        IF is_maintenance = FALSE THEN
+            down_requests := down_requests \/ {num} ||
+            leds(DOWN |-> num) := ON ||
+            pressed_buttons := pressed_buttons \/ {DOWN |-> num} ||
+            press_time(DOWN |-> num) := 0
+        ELSE
+            leds(DOWN|->num) := BLINK ||
+            blink_time(DOWN |-> num) := 0
+        END
     END;
 
     release_level(num) =
