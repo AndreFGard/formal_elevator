@@ -35,12 +35,13 @@ INVARIANT
     door_open_time : NATURAL &
     weight : NATURAL &
     n_passengers : NATURAL &
+    n_passengers <= kMaxPassengers &
     is_maintenance : BOOL &
     maintenance_requested: BOOL  &
     
     (is_maintenance = TRUE => direction = kStopped & door = kOpen) &
     (direction /= kStopped => door = kClosed) &
-    (weight > kMaxWeight => (direction = kStopped & door =kOpen)) &
+    (weight > kMaxWeight => (direction = kStopped & door = kOpen)) &
     (door_open_time > 0 => door = kOpen) &
     (door_blocked = TRUE => door = kOpen)
 INITIALISATION
@@ -98,7 +99,7 @@ OPERATIONS
      END;
     // Updates anything regarding timers.
     TickDoor = BEGIN
-        IF door = kOpen THEN door_open_time   := min({door_open_time +1,kMaxDoorOpenTime}) END
+        IF door = kOpen THEN door_open_time := min({door_open_time + 1, kMaxDoorOpenTime}) END
     END;
     
     // WEIGHT & PASSENGERS
@@ -106,7 +107,8 @@ OPERATIONS
     PRE
         direction = kStopped & 
         door = kOpen &
-        weighs:NAT
+        weighs : NAT &
+        n_passengers < kMaxPassengers
     THEN
         weight := weight + weighs ||
         n_passengers := n_passengers + 1
@@ -116,7 +118,7 @@ OPERATIONS
     PRE
         direction = kStopped & 
         door = kOpen &
-        weighs:NAT &
+        weighs : NAT &
         weighs <= weight &
         n_passengers > 0
     THEN
