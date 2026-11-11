@@ -36,12 +36,12 @@ ALL_MAIN == (requests \/ up_requests \/ down_requests);
 
 GET_UP_MAIN == (
     {lv | lv : requests \/ up_requests & lv >= level} \/
-    {lv | lv : down_requests & lv >= level & !gg .(gg : ALL_MAIN => gg <= lv)}
+    {lv | lv : down_requests & lv > level & !gg .(gg : ALL_MAIN => gg <= lv)}
 );
 
 GET_DOWN_MAIN == (
     {lv | lv : requests \/ down_requests & lv <= level} \/
-    {lv | lv : up_requests & lv <= level & !gg .(gg : ALL_MAIN => gg >= lv)}
+    {lv | lv : up_requests & lv < level & !gg .(gg : ALL_MAIN => gg >= lv)}
 );
 
 HAS_UP_MAIN == (GET_UP_MAIN /= {});

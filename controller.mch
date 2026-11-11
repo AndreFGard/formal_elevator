@@ -76,7 +76,8 @@ button_open =
     PRE
         direction = kStopped &
         is_maintenance = FALSE &
-        door = kClosed
+        door = kClosed &
+        state /= kOpening
     THEN
         OpenDoor ||
         state := kClosing

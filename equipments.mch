@@ -69,7 +69,10 @@ OPERATIONS
     Move(new_direction) =
     PRE
         new_direction: Direction &
-        CAN_MOVE(new_direction)
+        CAN_MOVE(new_direction) &
+        (direction = kUp => level < kNLevels) &
+        (direction = kDown => level > 1) &
+        door_open_time <= kMaxDoorOpenTime
     THEN
         IF new_direction = kUp THEN
             level := level + 1 ||
