@@ -5,7 +5,7 @@ SETS
     Direction = {kUp, kDown, kStopped};
     LedState = {ON, OFF, BLINK}
 CONSTANTS
-    kNLevels, kMaxDoorOpenTime, kMaxWeight
+    kNLevels, kMaxDoorOpenTime, kMaxWeight, kMaxPassengers
 PROPERTIES
     kNLevels : NATURAL &
     kNLevels = 5 &
@@ -14,7 +14,9 @@ PROPERTIES
     kMaxDoorOpenTime = 4 &
     kMaxWeight : NATURAL &
     // Represents 450  
-    kMaxWeight = 5 
+    kMaxWeight = 5 &
+    kMaxPassengers : NATURAL &
+    kMaxPassengers = 6
 VARIABLES
     level,
     direction,
@@ -22,6 +24,7 @@ VARIABLES
     door_open_time,
     door_blocked,
     weight,
+    n_passengers,
     is_maintenance,
     maintenance_requested
 INVARIANT
@@ -31,12 +34,14 @@ INVARIANT
     door_blocked: BOOL &
     door_open_time : NATURAL &
     weight : NATURAL &
+    n_passengers : NATURAL &
+    n_passengers <= kMaxPassengers &
     is_maintenance : BOOL &
     maintenance_requested: BOOL  &
     
     (is_maintenance = TRUE => direction = kStopped & door = kOpen) &
     (direction /= kStopped => door = kClosed) &
-    (weight > kMaxWeight => (direction = kStopped & door =kOpen)) &
+    (weight > kMaxWeight => (direction = kStopped & door = kOpen)) &
     (door_open_time > 0 => door = kOpen) &
     (door_blocked = TRUE => door = kOpen)
 INITIALISATION
@@ -46,6 +51,7 @@ INITIALISATION
     door_blocked := FALSE ||
     door_open_time := 0 ||
     weight := 0 ||
+    n_passengers := 0 ||
     is_maintenance := FALSE ||
     maintenance_requested := FALSE
 DEFINITIONS
@@ -93,29 +99,32 @@ OPERATIONS
      END;
     // Updates anything regarding timers.
     TickDoor = BEGIN
-        IF door = kOpen THEN door_open_time   := min({door_open_time +1,kMaxDoorOpenTime}) END
+        IF door = kOpen THEN door_open_time := min({door_open_time + 1, kMaxDoorOpenTime}) END
     END;
     
-    // WEIGHT
+    // WEIGHT & PASSENGERS
     AddPassenger(weighs) = 
     PRE
         direction = kStopped & 
         door = kOpen &
-        weighs:NAT
+        weighs : NAT &
+        n_passengers < kMaxPassengers
     THEN
-        weight := weight + weighs
+        weight := weight + weighs ||
+        n_passengers := n_passengers + 1
     END;
     
     RemovePassenger(weighs) = 
     PRE
         direction = kStopped & 
         door = kOpen &
-        weighs:NAT &
-        weighs <= weight
+        weighs : NAT &
+        weighs <= weight &
+        n_passengers > 0
     THEN
-        weight := weight - weighs
+        weight := weight - weighs ||
+        n_passengers := n_passengers - 1
     END;
-    
     
     BlockDoor = 
     PRE
