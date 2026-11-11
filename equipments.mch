@@ -35,13 +35,13 @@ INVARIANT
     door_open_time : NATURAL &
     weight : NATURAL &
     n_passengers : NATURAL &
-    n_passengers <= kMaxPassengers &
     is_maintenance : BOOL &
     maintenance_requested: BOOL  &
     
     (is_maintenance = TRUE => direction = kStopped & door = kOpen) &
     (direction /= kStopped => door = kClosed) &
     (weight > kMaxWeight => (direction = kStopped & door = kOpen)) &
+    (n_passengers > kMaxPassengers => (direction = kStopped & door = kOpen)) &
     (door_open_time > 0 => door = kOpen) &
     (door_blocked = TRUE => door = kOpen)
 INITIALISATION
@@ -57,6 +57,7 @@ INITIALISATION
 DEFINITIONS
     CAN_MOVE(dir) == (
         weight <= kMaxWeight &
+        n_passengers <= kMaxPassengers &
         dir : Direction &
         (dir = direction or direction = kStopped) &
         door = kClosed &
@@ -93,7 +94,8 @@ OPERATIONS
     CloseDoor = PRE
         weight <= kMaxWeight &
         is_maintenance = FALSE &
-        door_blocked = FALSE
+        door_blocked = FALSE &
+        n_passengers <= kMaxPassengers
     THEN
         door, door_open_time := kClosed, 0
      END;
@@ -107,8 +109,7 @@ OPERATIONS
     PRE
         direction = kStopped & 
         door = kOpen &
-        weighs : NAT &
-        n_passengers < kMaxPassengers
+        weighs : NAT
     THEN
         weight := weight + weighs ||
         n_passengers := n_passengers + 1

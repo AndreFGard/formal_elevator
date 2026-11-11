@@ -33,6 +33,7 @@ DEFINITIONS
 CAN_MOVE_CONT(new_dir) == (
     new_dir: Direction & 
     weight <= kMaxWeight &
+    n_passengers <= kMaxPassengers &
     (new_dir = direction or direction = kStopped) &
     door = kClosed &
     is_maintenance = FALSE &
@@ -63,7 +64,8 @@ CAN_CLOSE == ( (direction = kStopped &
     door = kOpen &
     door_blocked = FALSE &
     is_maintenance = FALSE &
-    weight <= kMaxWeight));
+    weight <= kMaxWeight &
+    n_passengers <= kMaxPassengers));
 
 FINISHED_DOWNWARDS_BUT_HAS_UPWARDS == (broader_direction /= kUp & not (HAS_OBJECTIVE_DOWN) & HAS_OBJECTIVE_UP & door = kClosed);
 

@@ -45,7 +45,7 @@ OPERATIONS
 
         IF is_maintenance = TRUE THEN
             int_mode := kDisplayMaintenance
-        ELSIF weight > kMaxWeight THEN
+        ELSIF ((weight > kMaxWeight) or (n_passengers > kMaxPassengers)) THEN
             int_mode := kDisplayOverweight
         ELSE
             int_mode := kDisplayNormal

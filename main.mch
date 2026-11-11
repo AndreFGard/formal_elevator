@@ -22,6 +22,7 @@ DEFINITIONS
     CAN_MOVE_MAIN(new_dir) == (
     new_dir: Direction & 
     weight <= kMaxWeight &
+    n_passengers <= kMaxPassengers &
     (new_dir = direction or direction = kStopped) &
     door = kClosed &
     is_maintenance = FALSE &
