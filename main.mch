@@ -1,16 +1,23 @@
 MACHINE
     main
 INCLUDES
-    controller
+    controller, visors
 PROMOTES
-    press_level, press_up, press_down,ToggleMaintenanceKey,BlockDoor,AddPassenger,RemovePassenger
+    press_level, press_up,         press_down,ToggleMaintenanceKey,BlockDoor,AddPassenger,RemovePassenger,
+    release_level, release_up, release_down,
+    button_open, button_close
+SETS
+    CyclePhase = {MAIN, VISORS, BUTTONS}
 VARIABLES
-    exception
+    exception,
+    phase
 INVARIANT
     exception : BOOL & 
-    exception = FALSE
+    exception = FALSE &
+    phase : CyclePhase
 INITIALISATION
-    exception := FALSE
+    exception := FALSE ||
+    phase := MAIN
 DEFINITIONS
     CAN_MOVE_MAIN(new_dir) == (
     new_dir: Direction & 
@@ -44,7 +51,9 @@ TARGET_DOWN_MAIN == max(GET_DOWN_MAIN)
 
 OPERATIONS
     TickMain =
-    BEGIN
+    PRE
+        phase = MAIN
+    THEN
         IF state = kNoObjective THEN
             NoObjective
         ELSIF state = kWorking &
@@ -59,6 +68,24 @@ OPERATIONS
             Maintenance
         ELSE
             exception := TRUE
-        END
+        END ||
+        phase := VISORS
+    END;
+    
+    TickVisors =
+    PRE
+        phase = VISORS
+    THEN
+        tick_visors ||
+        phase := BUTTONS
+    END;
+    
+    TickButtons =
+    PRE
+        phase = BUTTONS
+    THEN
+        tick_buttons ||
+        phase := MAIN
     END
+    
 END

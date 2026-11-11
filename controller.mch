@@ -1,8 +1,12 @@
 MACHINE
     controller
-INCLUDES equipments, buttons
+EXTENDS equipments, buttons
+/*
 PROMOTES
-      press_level, press_up, press_down, BlockDoor,ToggleMaintenanceKey,RemovePassenger,AddPassenger
+      press_level, press_up, press_down,
+      BlockDoor,ToggleMaintenanceKey,RemovePassenger,AddPassenger,
+      release_level, release_up, release_down, tick_buttons
+*/
 SETS
     MainState = {kNoObjective, kMaintenance, kWorking,kClosing,kOpening,kWaitingBoarding}
 VARIABLES
@@ -66,6 +70,28 @@ FINISHED_DOWNWARDS_BUT_HAS_UPWARDS == (broader_direction /= kUp & not (HAS_OBJEC
 FINISHED_UPWARDS_BUT_HAS_DOWNWARDS == (broader_direction /= kDown & not ( HAS_OBJECTIVE_UP) & HAS_OBJECTIVE_DOWN & door = kClosed)
 OPERATIONS
 
+button_open =
+    PRE
+        direction = kStopped &
+        is_maintenance = FALSE &
+        door = kClosed
+    THEN
+        OpenDoor ||
+        state := kClosing
+    END;
+
+button_close =
+    PRE
+        direction = kStopped &
+        is_maintenance = FALSE &
+        door = kOpen
+    THEN
+        IF CAN_CLOSE THEN
+            CloseDoor ||
+            state := kNoObjective
+        END
+    END;
+
 Opening = 
 PRE 
     direction = kStopped &
@@ -74,7 +100,7 @@ PRE
     state = kOpening 
 THEN
     OpenDoor ||
-    reach_floor(level) ||
+    reach_floor(level, broader_direction) ||
     IF maintenance_requested = TRUE THEN
         state := kMaintenance
     ELSE
@@ -207,4 +233,3 @@ THEN
 END
     
 END
-    
