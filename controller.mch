@@ -103,7 +103,19 @@ PRE
     state = kOpening 
 THEN
     OpenDoor ||
-    reach_floor(level, broader_direction) ||
+
+    IF broader_direction = kUp & level : down_requests & (GET_OBJECTIVES_UP - {level} = {})  THEN
+        reach_floor(level, kDown) ||
+        broader_direction := kDown
+
+    ELSIF broader_direction = kDown & level : up_requests & (GET_OBJECTIVES_DOWN - {level} = {}) THEN
+        reach_floor(level, kUp) ||
+        broader_direction := kUp
+
+    ELSE
+        reach_floor(level, broader_direction)
+    END ||
+    
     IF maintenance_requested = TRUE THEN
         state := kMaintenance
     ELSE
