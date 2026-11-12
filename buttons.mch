@@ -72,12 +72,27 @@ OPERATIONS
                         (({INTERNAL} * int_3) * {OFF}) ||
                 blink_time := next_blink_time <+ (finished_blinking * {0})
             ELSE
-                /*mantem todos mesmo se tiver mais de um e pisca*/
-                leds := leds <+ ((finished_blinking /\ all_reqs) * {ON}) <+ ((finished_blinking - all_reqs) * {OFF}) <+
-                        (({UP} * up_3) * {OFF}) <+ 
-                        (({DOWN} * down_3) * {OFF}) <+ 
-                        (({INTERNAL} * int_3) * {BLINK}) ||
-                blink_time := next_blink_time <+ (finished_blinking * {0}) <+ (({INTERNAL} * int_3) * {0})
+
+                ANY chosen WHERE
+                    chosen : int_3
+                THEN
+            
+                    requests := requests - (int_3 - {chosen}) ||
+            
+                    leds := leds <+ 
+                            ((finished_blinking /\ all_reqs) * {ON}) <+
+                            ((finished_blinking - all_reqs) * {OFF}) <+
+                            (({UP} * up_3) * {OFF}) <+
+                            (({DOWN} * down_3) * {OFF}) <+
+                            (({INTERNAL} * (int_3 - {chosen})) * {OFF}) <+
+                            (({INTERNAL} * {chosen}) * {BLINK}) ||
+            
+                    blink_time := next_blink_time <+
+                                  (finished_blinking * {0}) <+
+                                  (({INTERNAL} * {chosen}) * {0})
+            
+                END
+            
             END
         ELSE
             leds := leds <+ ((finished_blinking /\ all_reqs) * {ON}) <+ ((finished_blinking - all_reqs) * {OFF}) <+
