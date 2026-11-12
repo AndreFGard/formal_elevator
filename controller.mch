@@ -214,20 +214,12 @@ THEN
    // elevator stopped and wants maintenance
    IF maintenance_requested = TRUE & door = kClosed THEN
        state := kOpening
-   // continue up
-   ELSIF HAS_OBJECTIVE_UP & broader_direction /= kDown & door = kClosed THEN 
-       state := kWorking ||
-       broader_direction := kUp
-   // continue down
-   ELSIF HAS_OBJECTIVE_DOWN & broader_direction /= kUp & door = kClosed THEN 
-       state := kWorking ||
-       broader_direction := kDown  
-  /* disabled for simplicity
-   ELSIF  HAS_OBJECTIVE_UP & HAS_OBJECTIVE_DOWN  & door = kClosed THEN
+   // is idle and twwo concurrent requests
+   ELSIF  HAS_OBJECTIVE_UP & HAS_OBJECTIVE_DOWN & broader_direction = kStopped  & door = kClosed THEN
        ASSERT broader_direction = kStopped & min(GET_OBJECTIVES_UP) >= level & max(GET_OBJECTIVES_DOWN) <= level THEN
            LET closest_up,closest_down BE 
                closest_up = min(GET_OBJECTIVES_UP) - level &
-               closest_down = level - min(GET_OBJECTIVES_DOWN)
+               closest_down = level - max(GET_OBJECTIVES_DOWN)
            IN 
                IF closest_up < closest_down THEN
                    broader_direction := kUp
@@ -237,7 +229,15 @@ THEN
                state := kWorking
            END
        END
-   */
+       
+   // continue up
+   ELSIF HAS_OBJECTIVE_UP & broader_direction /= kDown & door = kClosed THEN 
+       state := kWorking ||
+       broader_direction := kUp
+   // continue down
+   ELSIF HAS_OBJECTIVE_DOWN & broader_direction /= kUp & door = kClosed THEN 
+       state := kWorking ||
+       broader_direction := kDown  
   ELSIF FINISHED_UPWARDS_BUT_HAS_DOWNWARDS THEN
        broader_direction:= kDown ||
        state := kWorking
