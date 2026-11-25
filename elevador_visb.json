@@ -68,11 +68,6 @@
       "value": "IF visor_level = 1 THEN \"visible\" ELSE \"hidden\" END"
     },
     {
-      "id": "objective_1",
-      "attr": "visibility",
-      "value": "IF objective = 1 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
       "id": "ext_digit_2",
       "attr": "visibility",
       "value": "IF visor_level = 2 THEN \"visible\" ELSE \"hidden\" END"
@@ -81,11 +76,6 @@
       "id": "int_digit_2",
       "attr": "visibility",
       "value": "IF visor_level = 2 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "objective_2",
-      "attr": "visibility",
-      "value": "IF objective = 2 THEN \"visible\" ELSE \"hidden\" END"
     },
     {
       "id": "ext_digit_3",
@@ -98,11 +88,6 @@
       "value": "IF visor_level = 3 THEN \"visible\" ELSE \"hidden\" END"
     },
     {
-      "id": "objective_3",
-      "attr": "visibility",
-      "value": "IF objective = 3 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
       "id": "ext_digit_4",
       "attr": "visibility",
       "value": "IF visor_level = 4 THEN \"visible\" ELSE \"hidden\" END"
@@ -113,11 +98,6 @@
       "value": "IF visor_level = 4 THEN \"visible\" ELSE \"hidden\" END"
     },
     {
-      "id": "objective_4",
-      "attr": "visibility",
-      "value": "IF objective = 4 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
       "id": "ext_digit_5",
       "attr": "visibility",
       "value": "IF visor_level = 5 THEN \"visible\" ELSE \"hidden\" END"
@@ -126,11 +106,6 @@
       "id": "int_digit_5",
       "attr": "visibility",
       "value": "IF visor_level = 5 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "objective_5",
-      "attr": "visibility",
-      "value": "IF objective = 5 THEN \"visible\" ELSE \"hidden\" END"
     },
     {
       "id": "ext_arrow_up",
@@ -191,156 +166,6 @@
       "id": "int_mode_overweight",
       "attr": "visibility",
       "value": "IF int_mode = kDisplayOverweight THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "state_idle",
-      "attr": "visibility",
-      "value": "IF state = kNoObjective THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "state_work",
-      "attr": "visibility",
-      "value": "IF state = kWorking THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "state_opening",
-      "attr": "visibility",
-      "value": "IF state = kOpening THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "state_closing",
-      "attr": "visibility",
-      "value": "IF state = kClosing THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "state_maintenance",
-      "attr": "visibility",
-      "value": "IF state = kMaintenance THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "state_waiting",
-      "attr": "visibility",
-      "value": "IF state = kWaitingBoarding THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "dir_up",
-      "attr": "visibility",
-      "value": "IF direction = kUp THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "dir_down",
-      "attr": "visibility",
-      "value": "IF direction = kDown THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "dir_stop",
-      "attr": "visibility",
-      "value": "IF direction = kStopped THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "broader_up",
-      "attr": "visibility",
-      "value": "IF broader_direction = kUp THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "broader_down",
-      "attr": "visibility",
-      "value": "IF broader_direction = kDown THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "broader_stop",
-      "attr": "visibility",
-      "value": "IF broader_direction = kStopped THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "door_open_label",
-      "attr": "visibility",
-      "value": "IF door = kOpen THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "door_closed_label",
-      "attr": "visibility",
-      "value": "IF door = kClosed THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "people_value_0",
-      "attr": "visibility",
-      "value": "IF n_passengers = 0 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "people_value_1",
-      "attr": "visibility",
-      "value": "IF n_passengers = 1 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "people_value_2",
-      "attr": "visibility",
-      "value": "IF n_passengers = 2 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "people_value_3",
-      "attr": "visibility",
-      "value": "IF n_passengers = 3 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "people_value_4",
-      "attr": "visibility",
-      "value": "IF n_passengers = 4 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "people_value_5",
-      "attr": "visibility",
-      "value": "IF n_passengers = 5 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "people_value_6",
-      "attr": "visibility",
-      "value": "IF n_passengers = 6 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "people_value_more",
-      "attr": "visibility",
-      "value": "IF n_passengers > 6 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "weight_value_0",
-      "attr": "visibility",
-      "value": "IF weight = 0 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "weight_value_1",
-      "attr": "visibility",
-      "value": "IF weight = 1 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "weight_value_2",
-      "attr": "visibility",
-      "value": "IF weight = 2 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "weight_value_3",
-      "attr": "visibility",
-      "value": "IF weight = 3 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "weight_value_4",
-      "attr": "visibility",
-      "value": "IF weight = 4 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "weight_value_5",
-      "attr": "visibility",
-      "value": "IF weight = 5 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "weight_value_more",
-      "attr": "visibility",
-      "value": "IF weight > 5 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "load_warning",
-      "attr": "visibility",
-      "value": "IF weight > kMaxWeight or n_passengers > kMaxPassengers THEN \"visible\" ELSE \"hidden\" END"
     },
     {
       "for": {
@@ -521,11 +346,6 @@
       "id": "int_maintenance_icon",
       "attr": "visibility",
       "value": "IF int_mode = kDisplayMaintenance THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "door_blocked_icon",
-      "attr": "visibility",
-      "value": "IF door_blocked = TRUE THEN \"visible\" ELSE \"hidden\" END"
     },
     {
       "id": "service_close_guard_overlay",
