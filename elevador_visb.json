@@ -1,0 +1,1054 @@
+{
+  "svg": "elevador.svg",
+  "model-name": "main",
+  "items": [
+    {
+      "id": "car_body",
+      "attr": "y",
+      "value": "659 - (level - 1) * 120"
+    },
+    {
+      "id": "car_back",
+      "attr": "y",
+      "value": "670 - (level - 1) * 120"
+    },
+    {
+      "id": "car_left_door",
+      "attr": "y",
+      "value": "675 - (level - 1) * 120"
+    },
+    {
+      "id": "car_right_door",
+      "attr": "y",
+      "value": "675 - (level - 1) * 120"
+    },
+    {
+      "id": "car_left_door",
+      "attr": "width",
+      "value": "IF door = kOpen THEN 27 ELSE 47 END"
+    },
+    {
+      "id": "car_right_door",
+      "attr": "x",
+      "value": "IF door = kOpen THEN 290 ELSE 263 END"
+    },
+    {
+      "id": "car_right_door",
+      "attr": "width",
+      "value": "IF door = kOpen THEN 27 ELSE 47 END"
+    },
+    {
+      "id": "car_arrow_up",
+      "attr": "y",
+      "value": "722 - (level - 1) * 120"
+    },
+    {
+      "id": "car_arrow_down",
+      "attr": "y",
+      "value": "722 - (level - 1) * 120"
+    },
+    {
+      "id": "car_arrow_up",
+      "attr": "visibility",
+      "value": "IF direction = kUp THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "car_arrow_down",
+      "attr": "visibility",
+      "value": "IF direction = kDown THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "ext_digit_1",
+      "attr": "visibility",
+      "value": "IF visor_level = 1 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "int_digit_1",
+      "attr": "visibility",
+      "value": "IF visor_level = 1 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "objective_1",
+      "attr": "visibility",
+      "value": "IF objective = 1 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "ext_digit_2",
+      "attr": "visibility",
+      "value": "IF visor_level = 2 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "int_digit_2",
+      "attr": "visibility",
+      "value": "IF visor_level = 2 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "objective_2",
+      "attr": "visibility",
+      "value": "IF objective = 2 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "ext_digit_3",
+      "attr": "visibility",
+      "value": "IF visor_level = 3 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "int_digit_3",
+      "attr": "visibility",
+      "value": "IF visor_level = 3 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "objective_3",
+      "attr": "visibility",
+      "value": "IF objective = 3 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "ext_digit_4",
+      "attr": "visibility",
+      "value": "IF visor_level = 4 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "int_digit_4",
+      "attr": "visibility",
+      "value": "IF visor_level = 4 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "objective_4",
+      "attr": "visibility",
+      "value": "IF objective = 4 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "ext_digit_5",
+      "attr": "visibility",
+      "value": "IF visor_level = 5 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "int_digit_5",
+      "attr": "visibility",
+      "value": "IF visor_level = 5 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "objective_5",
+      "attr": "visibility",
+      "value": "IF objective = 5 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "ext_arrow_up",
+      "attr": "visibility",
+      "value": "IF visor_dir = kUp THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "ext_arrow_down",
+      "attr": "visibility",
+      "value": "IF visor_dir = kDown THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "ext_arrow_stop",
+      "attr": "visibility",
+      "value": "IF visor_dir = kStopped THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "int_arrow_up",
+      "attr": "visibility",
+      "value": "IF visor_dir = kUp THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "int_arrow_down",
+      "attr": "visibility",
+      "value": "IF visor_dir = kDown THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "int_arrow_stop",
+      "attr": "visibility",
+      "value": "IF visor_dir = kStopped THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "ext_mode_normal",
+      "attr": "visibility",
+      "value": "IF ext_mode = kDisplayNormal THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "ext_mode_maintenance",
+      "attr": "visibility",
+      "value": "IF ext_mode = kDisplayMaintenance THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "ext_mode_broken",
+      "attr": "visibility",
+      "value": "IF ext_mode = kDisplayBroken THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "int_mode_normal",
+      "attr": "visibility",
+      "value": "IF int_mode = kDisplayNormal THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "int_mode_maintenance",
+      "attr": "visibility",
+      "value": "IF int_mode = kDisplayMaintenance THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "int_mode_overweight",
+      "attr": "visibility",
+      "value": "IF int_mode = kDisplayOverweight THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "state_idle",
+      "attr": "visibility",
+      "value": "IF state = kNoObjective THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "state_work",
+      "attr": "visibility",
+      "value": "IF state = kWorking THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "state_opening",
+      "attr": "visibility",
+      "value": "IF state = kOpening THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "state_closing",
+      "attr": "visibility",
+      "value": "IF state = kClosing THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "state_maintenance",
+      "attr": "visibility",
+      "value": "IF state = kMaintenance THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "state_waiting",
+      "attr": "visibility",
+      "value": "IF state = kWaitingBoarding THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "dir_up",
+      "attr": "visibility",
+      "value": "IF direction = kUp THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "dir_down",
+      "attr": "visibility",
+      "value": "IF direction = kDown THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "dir_stop",
+      "attr": "visibility",
+      "value": "IF direction = kStopped THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "broader_up",
+      "attr": "visibility",
+      "value": "IF broader_direction = kUp THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "broader_down",
+      "attr": "visibility",
+      "value": "IF broader_direction = kDown THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "broader_stop",
+      "attr": "visibility",
+      "value": "IF broader_direction = kStopped THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "door_open_label",
+      "attr": "visibility",
+      "value": "IF door = kOpen THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "door_closed_label",
+      "attr": "visibility",
+      "value": "IF door = kClosed THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "people_value_0",
+      "attr": "visibility",
+      "value": "IF n_passengers = 0 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "people_value_1",
+      "attr": "visibility",
+      "value": "IF n_passengers = 1 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "people_value_2",
+      "attr": "visibility",
+      "value": "IF n_passengers = 2 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "people_value_3",
+      "attr": "visibility",
+      "value": "IF n_passengers = 3 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "people_value_4",
+      "attr": "visibility",
+      "value": "IF n_passengers = 4 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "people_value_5",
+      "attr": "visibility",
+      "value": "IF n_passengers = 5 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "people_value_6",
+      "attr": "visibility",
+      "value": "IF n_passengers = 6 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "people_value_more",
+      "attr": "visibility",
+      "value": "IF n_passengers > 6 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "weight_value_0",
+      "attr": "visibility",
+      "value": "IF weight = 0 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "weight_value_1",
+      "attr": "visibility",
+      "value": "IF weight = 1 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "weight_value_2",
+      "attr": "visibility",
+      "value": "IF weight = 2 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "weight_value_3",
+      "attr": "visibility",
+      "value": "IF weight = 3 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "weight_value_4",
+      "attr": "visibility",
+      "value": "IF weight = 4 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "weight_value_5",
+      "attr": "visibility",
+      "value": "IF weight = 5 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "weight_value_more",
+      "attr": "visibility",
+      "value": "IF weight > 5 THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "load_warning",
+      "attr": "visibility",
+      "value": "IF weight > kMaxWeight or n_passengers > kMaxPassengers THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "for": {
+        "from": 1,
+        "to": 5
+      },
+      "id": "int_button_rect_%0",
+      "attr": "fill",
+      "value": "IF leds(INTERNAL|->%0) = ON THEN \"#14532d\" ELSIF leds(INTERNAL|->%0) = BLINK THEN \"#78350f\" ELSE \"#1e293b\" END"
+    },
+    {
+      "for": {
+        "from": 1,
+        "to": 5
+      },
+      "id": "int_button_rect_%0",
+      "attr": "stroke-width",
+      "value": "IF (INTERNAL|->%0) : pressed_buttons THEN 4 ELSE 2 END"
+    },
+    {
+      "for": {
+        "from": 1,
+        "to": 5
+      },
+      "id": "int_led_%0",
+      "attr": "visibility",
+      "value": "IF leds(INTERNAL|->%0) = ON THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "for": {
+        "from": 1,
+        "to": 5
+      },
+      "id": "int_blink_%0",
+      "attr": "visibility",
+      "value": "IF leds(INTERNAL|->%0) = BLINK THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "for": {
+        "from": 1,
+        "to": 5
+      },
+      "id": "int_release_%0",
+      "attr": "visibility",
+      "value": "IF (INTERNAL|->%0) : pressed_buttons THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "for": {
+        "from": 1,
+        "to": 4
+      },
+      "id": "hall_up_rect_%0",
+      "attr": "fill",
+      "value": "IF leds(UP|->%0) = ON THEN \"#14532d\" ELSIF leds(UP|->%0) = BLINK THEN \"#78350f\" ELSE \"#1e293b\" END"
+    },
+    {
+      "for": {
+        "from": 1,
+        "to": 4
+      },
+      "id": "hall_up_rect_%0",
+      "attr": "stroke-width",
+      "value": "IF (UP|->%0) : pressed_buttons THEN 4 ELSE 2 END"
+    },
+    {
+      "for": {
+        "from": 1,
+        "to": 4
+      },
+      "id": "hall_up_led_%0",
+      "attr": "visibility",
+      "value": "IF leds(UP|->%0) = ON THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "for": {
+        "from": 1,
+        "to": 4
+      },
+      "id": "hall_up_blink_%0",
+      "attr": "visibility",
+      "value": "IF leds(UP|->%0) = BLINK THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "for": {
+        "from": 1,
+        "to": 4
+      },
+      "id": "hall_up_release_%0",
+      "attr": "visibility",
+      "value": "IF (UP|->%0) : pressed_buttons THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "for": {
+        "from": 2,
+        "to": 5
+      },
+      "id": "hall_down_rect_%0",
+      "attr": "fill",
+      "value": "IF leds(DOWN|->%0) = ON THEN \"#14532d\" ELSIF leds(DOWN|->%0) = BLINK THEN \"#78350f\" ELSE \"#1e293b\" END"
+    },
+    {
+      "for": {
+        "from": 2,
+        "to": 5
+      },
+      "id": "hall_down_rect_%0",
+      "attr": "stroke-width",
+      "value": "IF (DOWN|->%0) : pressed_buttons THEN 4 ELSE 2 END"
+    },
+    {
+      "for": {
+        "from": 2,
+        "to": 5
+      },
+      "id": "hall_down_led_%0",
+      "attr": "visibility",
+      "value": "IF leds(DOWN|->%0) = ON THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "for": {
+        "from": 2,
+        "to": 5
+      },
+      "id": "hall_down_blink_%0",
+      "attr": "visibility",
+      "value": "IF leds(DOWN|->%0) = BLINK THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "for": {
+        "from": 2,
+        "to": 5
+      },
+      "id": "hall_down_release_%0",
+      "attr": "visibility",
+      "value": "IF (DOWN|->%0) : pressed_buttons THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "maintenance_key_lamp",
+      "attr": "fill",
+      "value": "IF maintenance_requested = TRUE THEN \"#fbbf24\" ELSE \"#334155\" END"
+    },
+    {
+      "id": "maintenance_key_rect",
+      "attr": "stroke-width",
+      "value": "IF maintenance_requested = TRUE THEN 3 ELSE 2 END"
+    },
+    {
+      "id": "tick_main",
+      "attr": "visibility",
+      "value": "IF phase = MAIN THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "tick_visors",
+      "attr": "visibility",
+      "value": "IF phase = VISORS THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "tick_buttons",
+      "attr": "visibility",
+      "value": "IF phase = BUTTONS THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "ext_broken_icon",
+      "attr": "visibility",
+      "value": "IF ext_mode = kDisplayBroken THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "ext_maintenance_icon",
+      "attr": "visibility",
+      "value": "IF ext_mode = kDisplayMaintenance THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "int_weight_icon",
+      "attr": "visibility",
+      "value": "IF int_mode = kDisplayOverweight THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "int_maintenance_icon",
+      "attr": "visibility",
+      "value": "IF int_mode = kDisplayMaintenance THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "door_blocked_icon",
+      "attr": "visibility",
+      "value": "IF door_blocked = TRUE THEN \"visible\" ELSE \"hidden\" END"
+    },
+    {
+      "id": "service_close_guard_overlay",
+      "attr": "visibility",
+      "value": "IF direction = kStopped & is_maintenance = FALSE & door = kOpen & door_blocked = FALSE & weight <= kMaxWeight & n_passengers <= kMaxPassengers THEN \"hidden\" ELSE \"visible\" END"
+    }
+  ],
+  "events": [
+    {
+      "id": "int_button_1",
+      "event": "press_level",
+      "predicates": [
+        "num=1"
+      ],
+      "items": [
+        {
+          "id": "int_button_1_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "int_release_1",
+      "event": "release_level",
+      "predicates": [
+        "num=1"
+      ],
+      "items": [
+        {
+          "id": "int_release_1_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "int_button_2",
+      "event": "press_level",
+      "predicates": [
+        "num=2"
+      ],
+      "items": [
+        {
+          "id": "int_button_2_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "int_release_2",
+      "event": "release_level",
+      "predicates": [
+        "num=2"
+      ],
+      "items": [
+        {
+          "id": "int_release_2_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "int_button_3",
+      "event": "press_level",
+      "predicates": [
+        "num=3"
+      ],
+      "items": [
+        {
+          "id": "int_button_3_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "int_release_3",
+      "event": "release_level",
+      "predicates": [
+        "num=3"
+      ],
+      "items": [
+        {
+          "id": "int_release_3_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "int_button_4",
+      "event": "press_level",
+      "predicates": [
+        "num=4"
+      ],
+      "items": [
+        {
+          "id": "int_button_4_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "int_release_4",
+      "event": "release_level",
+      "predicates": [
+        "num=4"
+      ],
+      "items": [
+        {
+          "id": "int_release_4_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "int_button_5",
+      "event": "press_level",
+      "predicates": [
+        "num=5"
+      ],
+      "items": [
+        {
+          "id": "int_button_5_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "int_release_5",
+      "event": "release_level",
+      "predicates": [
+        "num=5"
+      ],
+      "items": [
+        {
+          "id": "int_release_5_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "hall_up_1",
+      "event": "press_up",
+      "predicates": [
+        "num=1"
+      ],
+      "items": [
+        {
+          "id": "hall_up_1_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "hall_up_release_1",
+      "event": "release_up",
+      "predicates": [
+        "num=1"
+      ],
+      "items": [
+        {
+          "id": "hall_up_release_1_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "hall_up_2",
+      "event": "press_up",
+      "predicates": [
+        "num=2"
+      ],
+      "items": [
+        {
+          "id": "hall_up_2_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "hall_up_release_2",
+      "event": "release_up",
+      "predicates": [
+        "num=2"
+      ],
+      "items": [
+        {
+          "id": "hall_up_release_2_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "hall_up_3",
+      "event": "press_up",
+      "predicates": [
+        "num=3"
+      ],
+      "items": [
+        {
+          "id": "hall_up_3_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "hall_up_release_3",
+      "event": "release_up",
+      "predicates": [
+        "num=3"
+      ],
+      "items": [
+        {
+          "id": "hall_up_release_3_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "hall_up_4",
+      "event": "press_up",
+      "predicates": [
+        "num=4"
+      ],
+      "items": [
+        {
+          "id": "hall_up_4_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "hall_up_release_4",
+      "event": "release_up",
+      "predicates": [
+        "num=4"
+      ],
+      "items": [
+        {
+          "id": "hall_up_release_4_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "hall_down_2",
+      "event": "press_down",
+      "predicates": [
+        "num=2"
+      ],
+      "items": [
+        {
+          "id": "hall_down_2_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "hall_down_release_2",
+      "event": "release_down",
+      "predicates": [
+        "num=2"
+      ],
+      "items": [
+        {
+          "id": "hall_down_release_2_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "hall_down_3",
+      "event": "press_down",
+      "predicates": [
+        "num=3"
+      ],
+      "items": [
+        {
+          "id": "hall_down_3_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "hall_down_release_3",
+      "event": "release_down",
+      "predicates": [
+        "num=3"
+      ],
+      "items": [
+        {
+          "id": "hall_down_release_3_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "hall_down_4",
+      "event": "press_down",
+      "predicates": [
+        "num=4"
+      ],
+      "items": [
+        {
+          "id": "hall_down_4_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "hall_down_release_4",
+      "event": "release_down",
+      "predicates": [
+        "num=4"
+      ],
+      "items": [
+        {
+          "id": "hall_down_release_4_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "hall_down_5",
+      "event": "press_down",
+      "predicates": [
+        "num=5"
+      ],
+      "items": [
+        {
+          "id": "hall_down_5_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "hall_down_release_5",
+      "event": "release_down",
+      "predicates": [
+        "num=5"
+      ],
+      "items": [
+        {
+          "id": "hall_down_release_5_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "service_open",
+      "event": "button_open",
+      "items": [
+        {
+          "id": "service_open_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "service_close",
+      "event": "button_close",
+      "items": [
+        {
+          "id": "service_close_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "service_block",
+      "event": "BlockDoor",
+      "items": [
+        {
+          "id": "service_block_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "service_unblock",
+      "event": "UnblockDoor",
+      "items": [
+        {
+          "id": "service_unblock_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "service_add",
+      "event": "AddPassenger",
+      "predicates": [
+        "weighs=1"
+      ],
+      "items": [
+        {
+          "id": "service_add_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "service_remove",
+      "event": "RemovePassenger",
+      "predicates": [
+        "weighs=1"
+      ],
+      "items": [
+        {
+          "id": "service_remove_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "maintenance_key",
+      "event": "ToggleMaintenanceKey",
+      "items": [
+        {
+          "id": "maintenance_key_disabled_overlay",
+          "attr": "visibility",
+          "disabled": "\"visible\"",
+          "enabled": "\"hidden\""
+        }
+      ]
+    },
+    {
+      "id": "tick_main",
+      "event": "TickMain",
+      "items": [
+        {
+          "id": "tick_main_rect",
+          "attr": "fill",
+          "disabled": "\"#d6d8d0\"",
+          "enabled": "\"#416b5e\""
+        }
+      ]
+    },
+    {
+      "id": "tick_visors",
+      "event": "TickVisors",
+      "items": [
+        {
+          "id": "tick_visors_rect",
+          "attr": "fill",
+          "disabled": "\"#d6d8d0\"",
+          "enabled": "\"#416b5e\""
+        }
+      ]
+    },
+    {
+      "id": "tick_buttons",
+      "event": "TickButtons",
+      "items": [
+        {
+          "id": "tick_buttons_rect",
+          "attr": "fill",
+          "disabled": "\"#d6d8d0\"",
+          "enabled": "\"#416b5e\""
+        }
+      ]
+    }
+  ]
+}
