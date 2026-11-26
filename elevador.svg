@@ -1,83 +1,81 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="818" viewBox="0 0 1440 920" version="1.1">
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="698" viewBox="0 0 1440 785" version="1.1">
   <title>Elevador — visualização VisB</title>
   <desc>Edifício, cabine, chamadas, indicadores e comandos interativos do modelo B.</desc>
   <defs>
     <style>
-text { font-family: Arial, Helvetica, sans-serif; fill:#252c29; }
-.title { fill:#252c29; font-size:24px; font-weight:700; letter-spacing:0; }
-.section { fill:#252c29; font-size:14px; font-weight:700; letter-spacing:.3px; }
-.small { fill:#737b75; font-size:10px; letter-spacing:0; }
-.label { fill:#303a34; font-size:12px; }
-.floor-number { fill:#252c29; font-size:19px; font-weight:700; }
-.button-label { fill:#252c29; font-size:16px; font-weight:700; text-anchor:middle; dominant-baseline:middle; pointer-events:none; }
-.control-label { fill:#252c29; font-size:11px; font-weight:700; text-anchor:middle; dominant-baseline:middle; pointer-events:none; }
-.screen-digit { fill:#315f52; font-size:36px; font-family:Consolas, monospace; font-weight:700; text-anchor:middle; }
-.screen-arrow { fill:#315f52; font-size:27px; font-weight:700; text-anchor:middle; }
-.screen-caption { fill:#68736b; font-size:9px; font-weight:700; letter-spacing:.5px; }
-.panel-box { fill:#fbfaf6; stroke:#c9c7bd; stroke-width:1; }
-.btn { fill:#fbfaf6; stroke:#6f7770; stroke-width:1.2; }
-.btn-hover { stroke:#315f52; stroke-width:2; }
+text {font-family: Arial, Helvetica, sans-serif; fill:#252c29;}
+.title {fill:#252c29; font-size:24px; font-weight:700; letter-spacing:0;}
+.section {fill:#252c29; font-size:14px; font-weight:700; letter-spacing:.3px;}
+.small {fill:#737b75; font-size:10px; letter-spacing:0;}
+.label {fill:#303a34; font-size:12px;}
+.floor-number {fill:#252c29; font-size:19px; font-weight:700;}
+.button-label {fill:#252c29; font-size:16px; font-weight:700; text-anchor:middle; dominant-baseline:middle; pointer-events:none;}
+.control-label {fill:#252c29; font-size:11px; font-weight:700; text-anchor:middle; dominant-baseline:middle; pointer-events:none;}
+.screen-digit {fill:#315f52; font-size:36px; font-family:Consolas, monospace; font-weight:700; text-anchor:middle;}
+.screen-arrow {fill:#315f52; font-size:27px; font-weight:700; text-anchor:middle;}
+.screen-caption {fill:#68736b; font-size:9px; font-weight:700; letter-spacing:.5px;}
+.panel-box {fill:#fbfaf6;}
+.btn {fill:#ecebe4;}
+.btn-hover {}
 .led-off { fill:#d5d7d0; stroke:#858b83; stroke-width:1; }
 .led-on { fill:#477c62; stroke:#315f52; stroke-width:1; }
 .led-blink { fill:#d5a542; stroke:#9a762d; stroke-width:1; animation:ledBlink .75s steps(2,start) infinite; }
-.release-btn { fill:#f0e2df; stroke:#a44a40; stroke-width:1; }
-.release-text { fill:#8d3e36; font-size:9px; font-weight:700; text-anchor:middle; dominant-baseline:middle; pointer-events:none; }
-.tick-btn { fill:#d9e4dc; stroke:#315f52; stroke-width:1.2; }
-.service-btn { fill:#ecebe4; stroke:#aeb2a9; stroke-width:1.2; }
-.blink-outline { animation:outlineBlink 1s steps(2,start) infinite; }
-#maintenance_key_lamp { fill:#d5d7d0; stroke:#858b83; }
-#car_body { fill:#e7e8e1; stroke:#747b73; stroke-width:1.5; }
-#car_back { fill:#fbfaf6; stroke:#747b73; }
-#car_left_door, #car_right_door { fill:#d7dbd4; stroke:#68736b; }
-#car_state_tag rect { fill:#fbfaf6; stroke:#c9c7bd; }
-#int_mode_maintenance, #ext_mode_maintenance, #state_closing, #state_maintenance { fill:#a47a2c; }
-#int_mode_overweight, #ext_mode_broken, #load_warning { fill:#a44a40; }
-#state_opening, #door_open_label { fill:#477c62; }
-#state_work, #dir_up { fill:#315f52; }
-#dir_down { fill:#a47a2c; }
-#ext_arrow_up, #ext_arrow_down, #ext_arrow_stop, #int_arrow_up, #int_arrow_down, #int_arrow_stop { fill:#315f52; }
-#car_body, #car_back, #car_left_door, #car_right_door { transition: y .38s ease, x .32s ease, width .32s ease; }
-@keyframes ledBlink { 0% { opacity:1; } 50% { opacity:.12; } 100% { opacity:1; } }
+.release-btn {fill:#f0e2df;}
+.release-text {fill:#8d3e36; font-size:9px; font-weight:700; text-anchor:middle; dominant-baseline:middle; pointer-events:none;}
+.tick-btn {fill:#d9e4dc;}
+.tick-label { fill:#252c29; font-size:13px; font-weight:700; text-anchor:middle; dominant-baseline:middle; pointer-events:none; }
+.service-btn {fill:#ecebe4;}
+.blink-outline {animation:outlineBlink 1s steps(2,start) infinite;}
+#maintenance_key_lamp { stroke:#858b83; }
+#car_body {fill:#e7e8e1;}
+#car_back {fill:#fbfaf6;}
+#car_left_door, #car_right_door {fill:#d7dbd4;}
+#car_state_tag rect {fill:#fbfaf6;}
+#int_mode_maintenance, #ext_mode_maintenance, #state_closing, #state_maintenance {fill:#a47a2c;}
+#int_mode_overweight, #ext_mode_broken, #load_warning {fill:#a44a40;}
+#state_opening, #door_open_label {fill:#477c62;}
+#state_work, #dir_up {fill:#315f52;}
+#dir_down {fill:#a47a2c;}
+#ext_arrow_up, #ext_arrow_down, #ext_arrow_stop, #int_arrow_up, #int_arrow_down, #int_arrow_stop {fill:#315f52;}
+#car_body, #car_back, #car_left_door, #car_right_door {transition: y .38s ease, x .32s ease, width .32s ease;}
+@keyframes ledBlink {0% { opacity:1;} 50% { opacity:.12; } 100% { opacity:1; } }
 @keyframes outlineBlink { 0% { opacity:1; } 50% { opacity:.35; } 100% { opacity:1; } }
 </style>
   </defs>
-  <rect x="0" y="0" width="1440" height="920" fill="#f0efe9" />
-  <path d="M30 83 H1410" stroke="#c9c7bd" stroke-width="1" />
-  <text x="40" y="50" class="title">ELEVADOR</text>
+  <rect x="0" y="0" width="1440" height="785" fill="#ffffff" />
   <rect x="30" y="105" width="520" height="655" rx="3" class="panel-box" />
-  <rect x="176" y="160" width="174" height="590" rx="3" fill="#f8f9fa" stroke="#6c757d" stroke-width="2" />
-  <rect x="188" y="171" width="150" height="568" rx="1" fill="#f1f3f5" stroke="#adb5bd" stroke-width="1" />
-  <line x1="48" y1="269" x2="535" y2="269" stroke="#adb5bd" stroke-width="2" />
+  <rect x="176" y="160" width="174" height="590" rx="3" fill="#f8f9fa" stroke-width="2" />
+  <rect x="188" y="171" width="150" height="568" rx="1" fill="#f1f3f5" stroke-width="1" />
+  <line x1="48" y1="269" x2="535" y2="269" stroke-width="2" />
   <text x="75" y="227" class="floor-number">5</text>
   <rect x="194" y="263" width="135" height="5" rx="2" fill="#ced4da" opacity=".8" />
-  <line x1="48" y1="389" x2="535" y2="389" stroke="#adb5bd" stroke-width="2" />
+  <line x1="48" y1="389" x2="535" y2="389" stroke-width="2" />
   <text x="75" y="347" class="floor-number">4</text>
   <rect x="194" y="383" width="135" height="5" rx="2" fill="#ced4da" opacity=".8" />
-  <line x1="48" y1="509" x2="535" y2="509" stroke="#adb5bd" stroke-width="2" />
+  <line x1="48" y1="509" x2="535" y2="509" stroke-width="2" />
   <text x="75" y="467" class="floor-number">3</text>
   <rect x="194" y="503" width="135" height="5" rx="2" fill="#ced4da" opacity=".8" />
-  <line x1="48" y1="629" x2="535" y2="629" stroke="#adb5bd" stroke-width="2" />
+  <line x1="48" y1="629" x2="535" y2="629" stroke-width="2" />
   <text x="75" y="587" class="floor-number">2</text>
   <rect x="194" y="623" width="135" height="5" rx="2" fill="#ced4da" opacity=".8" />
-  <line x1="48" y1="749" x2="535" y2="749" stroke="#adb5bd" stroke-width="2" />
+  <line x1="48" y1="749" x2="535" y2="749" stroke-width="2" />
   <text x="75" y="707" class="floor-number">1</text>
   <rect x="194" y="743" width="135" height="5" rx="2" fill="#ced4da" opacity=".8" />
-  <line x1="202" y1="177" x2="202" y2="733" stroke="#adb5bd" stroke-width="2" />
-  <line x1="326" y1="177" x2="326" y2="733" stroke="#adb5bd" stroke-width="2" />
+  <line x1="202" y1="177" x2="202" y2="733" stroke-width="2" />
+  <line x1="326" y1="177" x2="326" y2="733" stroke-width="2" />
   <g id="elevator_car">
-    <rect id="car_body" x="207" y="659" width="112" height="82" rx="3" fill="#adb5bd" stroke="#cbd5e1" stroke-width="2.2" />
-    <rect id="car_back" x="216" y="670" width="94" height="58" rx="3" fill="#f8f9fa" stroke="#6c757d" stroke-width="1" />
-    <rect id="car_left_door" x="216" y="675" width="47" height="53" rx="2" fill="#d8dde2" stroke="#343a40" stroke-width="1.3" />
-    <rect id="car_right_door" x="263" y="675" width="47" height="53" rx="2" fill="#d8dde2" stroke="#343a40" stroke-width="1.3" />
-    <line x1="263" y1="678" x2="263" y2="725" stroke="#adb5bd" stroke-width="2" />
-    <text x="263" y="694" fill="#e9ecef" font-size="10" font-weight="700" text-anchor="middle">ELEVADOR</text>
+    <rect id="car_body" x="207" y="659" width="112" height="82" rx="3" fill="#adb5bd" stroke-width="2.2" />
+    <rect id="car_back" x="216" y="670" width="94" height="58" rx="3" fill="#f8f9fa" stroke-width="1" />
+    <rect id="car_left_door" x="216" y="675" width="47" height="53" rx="2" fill="#d8dde2" stroke-width="1.3" />
+    <rect id="car_right_door" x="263" y="675" width="47" height="53" rx="2" fill="#d8dde2" stroke-width="1.3" />
+    <line x1="263" y1="678" x2="263" y2="725" stroke-width="2" />
     <text id="car_arrow_up" x="263" y="722" class="screen-arrow" visibility="hidden">▲</text>
     <text id="car_arrow_down" x="263" y="722" class="screen-arrow" visibility="hidden">▼</text>
   </g>
   <g id="car_state_tag">
-    <rect x="207" y="118" width="112" height="28" rx="2" fill="#0f172a" stroke="#6c757d" />
-    <text x="263" y="137" class="small" text-anchor="middle">POSIÇÃO ATUAL</text>
+    <rect x="207" y="118" width="112" height="28" rx="2" fill="#0f172a" />
+    <text x="263" y="137" class="small" text-anchor="middle">ELEVADOR</text>
   </g>
   <g id="hall_up_1">
     <rect id="hall_up_rect_1" x="377" y="680" width="36" height="40" rx="2" class="btn" fill="#e9ecef" stroke-width="1.5" />
@@ -184,9 +182,9 @@ text { font-family: Arial, Helvetica, sans-serif; fill:#252c29; }
     <text x="496" y="221" class="release-text">R</text>
   </g>
   <rect x="575" y="105" width="835" height="655" rx="3" class="panel-box" />
-  <rect x="600" y="155" width="280" height="88" rx="2" fill="#f0efe9" stroke="#c9c7bd" stroke-width="1" transform="translate(275 0)" />
-  <text x="615" y="178" class="screen-caption" transform="translate(275 0)">EXT</text>
-  <rect x="642" y="169" width="72" height="61" rx="1" fill="#e4e7df" stroke="#d0d2c9" stroke-width="1" transform="translate(275 0)" />
+  <rect x="600" y="155" width="280" height="88" rx="2" fill="#f0efe9" stroke-width="1" transform="translate(275 0)" />
+  <text x="615" y="178" class="screen-caption" transform="translate(275 0)">EXTERIOR</text>
+  <rect x="642" y="169" width="72" height="61" rx="1" fill="#e4e7df" stroke-width="1" transform="translate(275 0)" />
   <text id="ext_digit_1" x="678" y="218" class="screen-digit" visibility="visible" transform="translate(275 0)">1</text>
   <text id="ext_digit_2" x="678" y="218" class="screen-digit" visibility="hidden" transform="translate(275 0)">2</text>
   <text id="ext_digit_3" x="678" y="218" class="screen-digit" visibility="hidden" transform="translate(275 0)">3</text>
@@ -206,9 +204,9 @@ text { font-family: Arial, Helvetica, sans-serif; fill:#252c29; }
     <circle cx="850" cy="180" r="11" fill="#d5a542" />
     <text x="850" y="184" fill="#252c29" font-size="10" font-weight="700" text-anchor="middle">M</text>
   </g>
-  <rect x="600" y="252" width="280" height="88" rx="2" fill="#f0efe9" stroke="#c9c7bd" stroke-width="1" transform="translate(275 0)" />
-  <text x="615" y="275" class="screen-caption" transform="translate(275 0)">INT</text>
-  <rect x="642" y="266" width="72" height="61" rx="1" fill="#e4e7df" stroke="#d0d2c9" stroke-width="1" transform="translate(275 0)" />
+  <rect x="600" y="252" width="280" height="88" rx="2" fill="#f0efe9" stroke-width="1" transform="translate(275 0)" />
+  <text x="615" y="275" class="screen-caption" transform="translate(275 0)">INTERIOR</text>
+  <rect x="642" y="266" width="72" height="61" rx="1" fill="#e4e7df" stroke-width="1" transform="translate(275 0)" />
   <text id="int_digit_1" x="678" y="315" class="screen-digit" visibility="visible" transform="translate(275 0)">1</text>
   <text id="int_digit_2" x="678" y="315" class="screen-digit" visibility="hidden" transform="translate(275 0)">2</text>
   <text id="int_digit_3" x="678" y="315" class="screen-digit" visibility="hidden" transform="translate(275 0)">3</text>
@@ -221,8 +219,8 @@ text { font-family: Arial, Helvetica, sans-serif; fill:#252c29; }
   <text id="int_mode_maintenance" x="824" y="317" class="screen-caption" text-anchor="middle" fill="#fbbf24" visibility="hidden" transform="translate(275 0)">MANUT.</text>
   <text id="int_mode_overweight" x="824" y="317" class="screen-caption" text-anchor="middle" fill="#f87171" visibility="hidden" transform="translate(275 0)">SOBREP.</text>
   <g id="int_weight_icon" visibility="hidden" transform="translate(275 0)">
-    <line x1="850" y1="270" x2="850" y2="291" stroke="#a44a40" stroke-width="2" />
-    <line x1="839" y1="275" x2="861" y2="275" stroke="#a44a40" stroke-width="2" />
+    <line x1="850" y1="270" x2="850" y2="291" stroke-width="2" />
+    <line x1="839" y1="275" x2="861" y2="275" stroke-width="2" />
     <path d="M840 275 L835 285 H845 Z M860 275 L855 285 H865 Z" fill="#a44a40" />
     <circle cx="850" cy="270" r="3" fill="#a44a40" />
   </g>
@@ -230,7 +228,7 @@ text { font-family: Arial, Helvetica, sans-serif; fill:#252c29; }
     <circle cx="850" cy="287" r="10" fill="#d5a542" />
     <text x="850" y="291" fill="#252c29" font-size="10" font-weight="700" text-anchor="middle">M</text>
   </g>
-  <rect x="600" y="360" width="785" height="370" rx="2" fill="#fbfaf6" stroke="#c9c7bd" stroke-width="1" /><g id="int_button_1" transform="translate(-330 180)">
+  <rect x="600" y="360" width="785" height="370" rx="2" fill="#fbfaf6" stroke-width="1" /><g id="int_button_1" transform="translate(-330 180)">
     <rect id="int_button_rect_1" x="980" y="210.0" width="92" height="49" rx="3" class="btn" fill="#e9ecef" stroke-width="1.5" />
     <rect x="980" y="210.0" width="92" height="49" rx="3" id="int_button_1_disabled_overlay" fill="#4b514c" opacity="0.32" stroke="none" pointer-events="none" visibility="hidden" />
     <text x="1010" y="235.0" class="button-label">1</text>
@@ -329,20 +327,19 @@ text { font-family: Arial, Helvetica, sans-serif; fill:#252c29; }
   <g id="maintenance_key" transform="translate(-320 182)">
     <rect id="maintenance_key_rect" x="1170" y="398.0" width="206" height="55" rx="3" class="service-btn" stroke-width="1.3" fill="#e9ecef" />
     <rect x="1170" y="398.0" width="206" height="55" rx="3" id="maintenance_key_disabled_overlay" fill="#4b514c" opacity="0.32" stroke="none" pointer-events="none" visibility="hidden" />
-    <circle id="maintenance_key_lamp" cx="1192" cy="425.0" r="7" fill="#adb5bd" stroke="#6c757d" />
+    <circle id="maintenance_key_lamp" cx="1192" cy="425.0" r="7" fill="#adb5bd" />
     <text x="1280" y="429.0" class="control-label">CHAVE MANUTENÇÃO</text>
   </g>
-  <rect x="30" y="790" width="520" height="82" rx="3" class="panel-box" />
   <g id="tick_main" visibility="visible">
-    <rect x="45" y="807" width="490" height="48" rx="2" id="tick_main_rect" class="tick-btn" />
-    <text x="290" y="837" class="control-label">PRÓXIMO TICK</text>
+    <circle cx="810" cy="247" r="30" id="tick_main_rect" class="tick-btn" />
+    <text x="810" y="247" class="tick-label">TICK</text>
   </g>
   <g id="tick_visors" visibility="hidden">
-    <rect x="45" y="807" width="490" height="48" rx="2" id="tick_visors_rect" class="tick-btn" />
-    <text x="290" y="837" class="control-label">PRÓXIMO TICK</text>
+    <circle cx="810" cy="247" r="30" id="tick_visors_rect" class="tick-btn" />
+    <text x="810" y="247" class="tick-label">TICK</text>
   </g>
   <g id="tick_buttons" visibility="hidden">
-    <rect x="45" y="807" width="490" height="48" rx="2" id="tick_buttons_rect" class="tick-btn" />
-    <text x="290" y="837" class="control-label">PRÓXIMO TICK</text>
+    <circle cx="810" cy="247" r="30" id="tick_buttons_rect" class="tick-btn" />
+    <text x="810" y="247" class="tick-label">TICK</text>
   </g>
 </svg>

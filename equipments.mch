@@ -132,7 +132,7 @@ OPERATIONS
     
     BlockDoor = 
     PRE
-        door = kOpen
+        door = kOpen & door_blocked = FALSE
     THEN
         door_blocked := TRUE
     END;

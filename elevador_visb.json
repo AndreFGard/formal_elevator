@@ -241,7 +241,7 @@
     {
       "id": "maintenance_key_lamp",
       "attr": "fill",
-      "value": "IF maintenance_requested = TRUE THEN \"#fbbf24\" ELSE \"#334155\" END"
+      "value": "IF is_maintenance = TRUE THEN \"#477c62\" ELSIF maintenance_requested = TRUE THEN \"#fbbf24\" ELSE \"#d5d7d0\" END"
     },
     {
       "id": "maintenance_key_rect",
