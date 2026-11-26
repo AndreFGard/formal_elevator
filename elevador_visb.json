@@ -58,54 +58,17 @@
       "value": "IF direction = kDown THEN \"visible\" ELSE \"hidden\" END"
     },
     {
-      "id": "ext_digit_1",
+      "repeat": [
+        "ext",
+        "int"
+      ],
+      "for": {
+        "from": 1,
+        "to": 5
+      },
+      "id": "%0_digit_%1",
       "attr": "visibility",
-      "value": "IF visor_level = 1 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "int_digit_1",
-      "attr": "visibility",
-      "value": "IF visor_level = 1 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "ext_digit_2",
-      "attr": "visibility",
-      "value": "IF visor_level = 2 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "int_digit_2",
-      "attr": "visibility",
-      "value": "IF visor_level = 2 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "ext_digit_3",
-      "attr": "visibility",
-      "value": "IF visor_level = 3 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "int_digit_3",
-      "attr": "visibility",
-      "value": "IF visor_level = 3 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "ext_digit_4",
-      "attr": "visibility",
-      "value": "IF visor_level = 4 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "int_digit_4",
-      "attr": "visibility",
-      "value": "IF visor_level = 4 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "ext_digit_5",
-      "attr": "visibility",
-      "value": "IF visor_level = 5 THEN \"visible\" ELSE \"hidden\" END"
-    },
-    {
-      "id": "int_digit_5",
-      "attr": "visibility",
-      "value": "IF visor_level = 5 THEN \"visible\" ELSE \"hidden\" END"
+      "value": "IF visor_level = %1 THEN \"visible\" ELSE \"hidden\" END"
     },
     {
       "id": "ext_arrow_up",
@@ -173,17 +136,8 @@
         "to": 5
       },
       "id": "int_button_rect_%0",
-      "attr": "fill",
-      "value": "IF leds(INTERNAL|->%0) = ON THEN \"#14532d\" ELSIF leds(INTERNAL|->%0) = BLINK THEN \"#78350f\" ELSE \"#1e293b\" END"
-    },
-    {
-      "for": {
-        "from": 1,
-        "to": 5
-      },
-      "id": "int_button_rect_%0",
-      "attr": "stroke-width",
-      "value": "IF (INTERNAL|->%0) : pressed_buttons THEN 4 ELSE 2 END"
+      "fill": "IF leds(INTERNAL|->%0) = ON THEN \"#14532d\" ELSIF leds(INTERNAL|->%0) = BLINK THEN \"#78350f\" ELSE \"#1e293b\" END",
+      "stroke-width": "IF (INTERNAL|->%0) : pressed_buttons THEN 4 ELSE 2 END"
     },
     {
       "for": {
@@ -218,17 +172,8 @@
         "to": 4
       },
       "id": "hall_up_rect_%0",
-      "attr": "fill",
-      "value": "IF leds(UP|->%0) = ON THEN \"#14532d\" ELSIF leds(UP|->%0) = BLINK THEN \"#78350f\" ELSE \"#1e293b\" END"
-    },
-    {
-      "for": {
-        "from": 1,
-        "to": 4
-      },
-      "id": "hall_up_rect_%0",
-      "attr": "stroke-width",
-      "value": "IF (UP|->%0) : pressed_buttons THEN 4 ELSE 2 END"
+      "fill": "IF leds(UP|->%0) = ON THEN \"#14532d\" ELSIF leds(UP|->%0) = BLINK THEN \"#78350f\" ELSE \"#1e293b\" END",
+      "stroke-width": "IF (UP|->%0) : pressed_buttons THEN 4 ELSE 2 END"
     },
     {
       "for": {
@@ -263,17 +208,8 @@
         "to": 5
       },
       "id": "hall_down_rect_%0",
-      "attr": "fill",
-      "value": "IF leds(DOWN|->%0) = ON THEN \"#14532d\" ELSIF leds(DOWN|->%0) = BLINK THEN \"#78350f\" ELSE \"#1e293b\" END"
-    },
-    {
-      "for": {
-        "from": 2,
-        "to": 5
-      },
-      "id": "hall_down_rect_%0",
-      "attr": "stroke-width",
-      "value": "IF (DOWN|->%0) : pressed_buttons THEN 4 ELSE 2 END"
+      "fill": "IF leds(DOWN|->%0) = ON THEN \"#14532d\" ELSIF leds(DOWN|->%0) = BLINK THEN \"#78350f\" ELSE \"#1e293b\" END",
+      "stroke-width": "IF (DOWN|->%0) : pressed_buttons THEN 4 ELSE 2 END"
     },
     {
       "for": {
@@ -355,14 +291,18 @@
   ],
   "events": [
     {
-      "id": "int_button_1",
+      "for": {
+        "from": 1,
+        "to": 5
+      },
+      "id": "int_button_%0",
       "event": "press_level",
       "predicates": [
-        "num=1"
+        "num=%0"
       ],
       "items": [
         {
-          "id": "int_button_1_disabled_overlay",
+          "id": "int_button_%0_disabled_overlay",
           "attr": "visibility",
           "disabled": "\"visible\"",
           "enabled": "\"hidden\""
@@ -370,14 +310,18 @@
       ]
     },
     {
-      "id": "int_release_1",
+      "for": {
+        "from": 1,
+        "to": 5
+      },
+      "id": "int_release_%0",
       "event": "release_level",
       "predicates": [
-        "num=1"
+        "num=%0"
       ],
       "items": [
         {
-          "id": "int_release_1_disabled_overlay",
+          "id": "int_release_%0_disabled_overlay",
           "attr": "visibility",
           "disabled": "\"visible\"",
           "enabled": "\"hidden\""
@@ -385,134 +329,18 @@
       ]
     },
     {
-      "id": "int_button_2",
-      "event": "press_level",
-      "predicates": [
-        "num=2"
-      ],
-      "items": [
-        {
-          "id": "int_button_2_disabled_overlay",
-          "attr": "visibility",
-          "disabled": "\"visible\"",
-          "enabled": "\"hidden\""
-        }
-      ]
-    },
-    {
-      "id": "int_release_2",
-      "event": "release_level",
-      "predicates": [
-        "num=2"
-      ],
-      "items": [
-        {
-          "id": "int_release_2_disabled_overlay",
-          "attr": "visibility",
-          "disabled": "\"visible\"",
-          "enabled": "\"hidden\""
-        }
-      ]
-    },
-    {
-      "id": "int_button_3",
-      "event": "press_level",
-      "predicates": [
-        "num=3"
-      ],
-      "items": [
-        {
-          "id": "int_button_3_disabled_overlay",
-          "attr": "visibility",
-          "disabled": "\"visible\"",
-          "enabled": "\"hidden\""
-        }
-      ]
-    },
-    {
-      "id": "int_release_3",
-      "event": "release_level",
-      "predicates": [
-        "num=3"
-      ],
-      "items": [
-        {
-          "id": "int_release_3_disabled_overlay",
-          "attr": "visibility",
-          "disabled": "\"visible\"",
-          "enabled": "\"hidden\""
-        }
-      ]
-    },
-    {
-      "id": "int_button_4",
-      "event": "press_level",
-      "predicates": [
-        "num=4"
-      ],
-      "items": [
-        {
-          "id": "int_button_4_disabled_overlay",
-          "attr": "visibility",
-          "disabled": "\"visible\"",
-          "enabled": "\"hidden\""
-        }
-      ]
-    },
-    {
-      "id": "int_release_4",
-      "event": "release_level",
-      "predicates": [
-        "num=4"
-      ],
-      "items": [
-        {
-          "id": "int_release_4_disabled_overlay",
-          "attr": "visibility",
-          "disabled": "\"visible\"",
-          "enabled": "\"hidden\""
-        }
-      ]
-    },
-    {
-      "id": "int_button_5",
-      "event": "press_level",
-      "predicates": [
-        "num=5"
-      ],
-      "items": [
-        {
-          "id": "int_button_5_disabled_overlay",
-          "attr": "visibility",
-          "disabled": "\"visible\"",
-          "enabled": "\"hidden\""
-        }
-      ]
-    },
-    {
-      "id": "int_release_5",
-      "event": "release_level",
-      "predicates": [
-        "num=5"
-      ],
-      "items": [
-        {
-          "id": "int_release_5_disabled_overlay",
-          "attr": "visibility",
-          "disabled": "\"visible\"",
-          "enabled": "\"hidden\""
-        }
-      ]
-    },
-    {
-      "id": "hall_up_1",
+      "for": {
+        "from": 1,
+        "to": 4
+      },
+      "id": "hall_up_%0",
       "event": "press_up",
       "predicates": [
-        "num=1"
+        "num=%0"
       ],
       "items": [
         {
-          "id": "hall_up_1_disabled_overlay",
+          "id": "hall_up_%0_disabled_overlay",
           "attr": "visibility",
           "disabled": "\"visible\"",
           "enabled": "\"hidden\""
@@ -520,14 +348,18 @@
       ]
     },
     {
-      "id": "hall_up_release_1",
+      "for": {
+        "from": 1,
+        "to": 4
+      },
+      "id": "hall_up_release_%0",
       "event": "release_up",
       "predicates": [
-        "num=1"
+        "num=%0"
       ],
       "items": [
         {
-          "id": "hall_up_release_1_disabled_overlay",
+          "id": "hall_up_release_%0_disabled_overlay",
           "attr": "visibility",
           "disabled": "\"visible\"",
           "enabled": "\"hidden\""
@@ -535,104 +367,18 @@
       ]
     },
     {
-      "id": "hall_up_2",
-      "event": "press_up",
-      "predicates": [
-        "num=2"
-      ],
-      "items": [
-        {
-          "id": "hall_up_2_disabled_overlay",
-          "attr": "visibility",
-          "disabled": "\"visible\"",
-          "enabled": "\"hidden\""
-        }
-      ]
-    },
-    {
-      "id": "hall_up_release_2",
-      "event": "release_up",
-      "predicates": [
-        "num=2"
-      ],
-      "items": [
-        {
-          "id": "hall_up_release_2_disabled_overlay",
-          "attr": "visibility",
-          "disabled": "\"visible\"",
-          "enabled": "\"hidden\""
-        }
-      ]
-    },
-    {
-      "id": "hall_up_3",
-      "event": "press_up",
-      "predicates": [
-        "num=3"
-      ],
-      "items": [
-        {
-          "id": "hall_up_3_disabled_overlay",
-          "attr": "visibility",
-          "disabled": "\"visible\"",
-          "enabled": "\"hidden\""
-        }
-      ]
-    },
-    {
-      "id": "hall_up_release_3",
-      "event": "release_up",
-      "predicates": [
-        "num=3"
-      ],
-      "items": [
-        {
-          "id": "hall_up_release_3_disabled_overlay",
-          "attr": "visibility",
-          "disabled": "\"visible\"",
-          "enabled": "\"hidden\""
-        }
-      ]
-    },
-    {
-      "id": "hall_up_4",
-      "event": "press_up",
-      "predicates": [
-        "num=4"
-      ],
-      "items": [
-        {
-          "id": "hall_up_4_disabled_overlay",
-          "attr": "visibility",
-          "disabled": "\"visible\"",
-          "enabled": "\"hidden\""
-        }
-      ]
-    },
-    {
-      "id": "hall_up_release_4",
-      "event": "release_up",
-      "predicates": [
-        "num=4"
-      ],
-      "items": [
-        {
-          "id": "hall_up_release_4_disabled_overlay",
-          "attr": "visibility",
-          "disabled": "\"visible\"",
-          "enabled": "\"hidden\""
-        }
-      ]
-    },
-    {
-      "id": "hall_down_2",
+      "for": {
+        "from": 2,
+        "to": 5
+      },
+      "id": "hall_down_%0",
       "event": "press_down",
       "predicates": [
-        "num=2"
+        "num=%0"
       ],
       "items": [
         {
-          "id": "hall_down_2_disabled_overlay",
+          "id": "hall_down_%0_disabled_overlay",
           "attr": "visibility",
           "disabled": "\"visible\"",
           "enabled": "\"hidden\""
@@ -640,104 +386,18 @@
       ]
     },
     {
-      "id": "hall_down_release_2",
+      "for": {
+        "from": 2,
+        "to": 5
+      },
+      "id": "hall_down_release_%0",
       "event": "release_down",
       "predicates": [
-        "num=2"
+        "num=%0"
       ],
       "items": [
         {
-          "id": "hall_down_release_2_disabled_overlay",
-          "attr": "visibility",
-          "disabled": "\"visible\"",
-          "enabled": "\"hidden\""
-        }
-      ]
-    },
-    {
-      "id": "hall_down_3",
-      "event": "press_down",
-      "predicates": [
-        "num=3"
-      ],
-      "items": [
-        {
-          "id": "hall_down_3_disabled_overlay",
-          "attr": "visibility",
-          "disabled": "\"visible\"",
-          "enabled": "\"hidden\""
-        }
-      ]
-    },
-    {
-      "id": "hall_down_release_3",
-      "event": "release_down",
-      "predicates": [
-        "num=3"
-      ],
-      "items": [
-        {
-          "id": "hall_down_release_3_disabled_overlay",
-          "attr": "visibility",
-          "disabled": "\"visible\"",
-          "enabled": "\"hidden\""
-        }
-      ]
-    },
-    {
-      "id": "hall_down_4",
-      "event": "press_down",
-      "predicates": [
-        "num=4"
-      ],
-      "items": [
-        {
-          "id": "hall_down_4_disabled_overlay",
-          "attr": "visibility",
-          "disabled": "\"visible\"",
-          "enabled": "\"hidden\""
-        }
-      ]
-    },
-    {
-      "id": "hall_down_release_4",
-      "event": "release_down",
-      "predicates": [
-        "num=4"
-      ],
-      "items": [
-        {
-          "id": "hall_down_release_4_disabled_overlay",
-          "attr": "visibility",
-          "disabled": "\"visible\"",
-          "enabled": "\"hidden\""
-        }
-      ]
-    },
-    {
-      "id": "hall_down_5",
-      "event": "press_down",
-      "predicates": [
-        "num=5"
-      ],
-      "items": [
-        {
-          "id": "hall_down_5_disabled_overlay",
-          "attr": "visibility",
-          "disabled": "\"visible\"",
-          "enabled": "\"hidden\""
-        }
-      ]
-    },
-    {
-      "id": "hall_down_release_5",
-      "event": "release_down",
-      "predicates": [
-        "num=5"
-      ],
-      "items": [
-        {
-          "id": "hall_down_release_5_disabled_overlay",
+          "id": "hall_down_release_%0_disabled_overlay",
           "attr": "visibility",
           "disabled": "\"visible\"",
           "enabled": "\"hidden\""
