@@ -182,8 +182,8 @@ text {font-family: Arial, Helvetica, sans-serif; fill:#252c29;}
     <text x="496" y="221" class="release-text">R</text>
   </g>
   <rect x="575" y="105" width="835" height="655" rx="3" class="panel-box" />
-  <rect x="600" y="155" width="280" height="88" rx="2" fill="#f0efe9" stroke-width="1" transform="translate(275 0)" />
-  <text x="615" y="178" class="screen-caption" transform="translate(275 0)">EXTERIOR</text>
+  <rect x="560" y="155" width="320" height="88" rx="2" fill="#f0efe9" stroke-width="1" transform="translate(275 0)" />
+  <text x="575" y="178" class="screen-caption" transform="translate(275 0)">EXTERIOR</text>
   <rect x="642" y="169" width="72" height="61" rx="1" fill="#e4e7df" stroke-width="1" transform="translate(275 0)" />
   <text id="ext_digit_1" x="678" y="218" class="screen-digit" visibility="visible" transform="translate(275 0)">1</text>
   <text id="ext_digit_2" x="678" y="218" class="screen-digit" visibility="hidden" transform="translate(275 0)">2</text>
@@ -204,8 +204,8 @@ text {font-family: Arial, Helvetica, sans-serif; fill:#252c29;}
     <circle cx="850" cy="180" r="11" fill="#d5a542" />
     <text x="850" y="184" fill="#252c29" font-size="10" font-weight="700" text-anchor="middle">M</text>
   </g>
-  <rect x="600" y="252" width="280" height="88" rx="2" fill="#f0efe9" stroke-width="1" transform="translate(275 0)" />
-  <text x="615" y="275" class="screen-caption" transform="translate(275 0)">INTERIOR</text>
+  <rect x="560" y="252" width="320" height="88" rx="2" fill="#f0efe9" stroke-width="1" transform="translate(275 0)" />
+  <text x="575" y="275" class="screen-caption" transform="translate(275 0)">INTERIOR</text>
   <rect x="642" y="266" width="72" height="61" rx="1" fill="#e4e7df" stroke-width="1" transform="translate(275 0)" />
   <text id="int_digit_1" x="678" y="315" class="screen-digit" visibility="visible" transform="translate(275 0)">1</text>
   <text id="int_digit_2" x="678" y="315" class="screen-digit" visibility="hidden" transform="translate(275 0)">2</text>
@@ -331,15 +331,15 @@ text {font-family: Arial, Helvetica, sans-serif; fill:#252c29;}
     <text x="1280" y="429.0" class="control-label">CHAVE MANUTENÇÃO</text>
   </g>
   <g id="tick_main" visibility="visible">
-    <circle cx="810" cy="247" r="30" id="tick_main_rect" class="tick-btn" />
-    <text x="810" y="247" class="tick-label">TICK</text>
+    <circle cx="786" cy="247" r="30" id="tick_main_rect" class="tick-btn" />
+    <text x="786" y="247" class="tick-label">TICK</text>
   </g>
   <g id="tick_visors" visibility="hidden">
-    <circle cx="810" cy="247" r="30" id="tick_visors_rect" class="tick-btn" />
-    <text x="810" y="247" class="tick-label">TICK</text>
+    <circle cx="786" cy="247" r="30" id="tick_visors_rect" class="tick-btn" />
+    <text x="786" y="247" class="tick-label">TICK</text>
   </g>
   <g id="tick_buttons" visibility="hidden">
-    <circle cx="810" cy="247" r="30" id="tick_buttons_rect" class="tick-btn" />
-    <text x="810" y="247" class="tick-label">TICK</text>
+    <circle cx="786" cy="247" r="30" id="tick_buttons_rect" class="tick-btn" />
+    <text x="786" y="247" class="tick-label">TICK</text>
   </g>
 </svg>
